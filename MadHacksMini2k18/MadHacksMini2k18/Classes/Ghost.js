@@ -18,14 +18,16 @@ var MadHacks;
             _this.anchor.setTo(0.5, 0);
             game.add.existing(_this);
             _this.isTouchingGround = true;
-            _this.actions = actions;
-            var curAction = actions.shift();
-            _this.action = curAction.actions;
-            _this.frames = curAction.frames;
+            _this.actions = JSON.parse(JSON.stringify(actions));
             console.log("ACTIONS PASSED IN: \n");
             for (var i = 0; i < actions.length; i++) {
                 console.log(actions[i].actions + " " + actions[i].frames);
             }
+            var curAction = actions.shift();
+            _this.action = curAction.actions;
+            _this.frames = curAction.frames;
+            console.log("CURRENT ACTOIN: " + _this.action);
+            console.log("CURRENT FRAMES: " + _this.frames);
             return _this;
         }
         Ghost.prototype.preload = function () {
@@ -38,9 +40,11 @@ var MadHacks;
             if (!this.freeze) {
                 if (this.action = "LEFT") {
                     this.body.velocity.x = -150;
+                    console.log('LEFTTT');
                 }
                 else if (this.action = "RIGHT") {
                     this.body.velocity.x = 150;
+                    console.log("RIGHTTTT");
                 }
                 else {
                     this.body.velocity.x = 0;
@@ -58,6 +62,8 @@ var MadHacks;
                         var curAction = this.actions.shift();
                         this.action = curAction.actions;
                         this.frames = curAction.frames;
+                        console.log("CURRENT ACTOIN: " + this.action);
+                        console.log("CURRENT FRAMES: " + this.frames);
                     }
                     else {
                         this.freeze = true;

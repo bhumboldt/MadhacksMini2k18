@@ -30,7 +30,8 @@
             this.oldAction = "WAIT";
             this.currentAction = "WAIT";
             this.actions = new Array<PlayerActions>();
-		}
+        }
+
         update() {
             //console.log(this.currentAction);
             if (this.isDead) {
@@ -95,10 +96,12 @@
             obj1.isTouchingGround = true;
 
         }
+
+        trapCollisionHandler(obj1: Player, obj2: Trap) {
             for (let i = 0; i < obj1.actions.length; i++) {
                 console.log(obj1.actions[i].actions + " " + obj1.actions[i].frames);
             }
-
+        }
 	}
 
 }

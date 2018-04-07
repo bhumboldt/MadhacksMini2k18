@@ -19,14 +19,17 @@
             this.anchor.setTo(0.5, 0);
             game.add.existing(this);
             this.isTouchingGround = true;
-            this.actions = actions;
-            let curAction = actions.shift();
-            this.action = curAction.actions;
-            this.frames = curAction.frames;
+            this.actions = JSON.parse(JSON.stringify(actions));
             console.log("ACTIONS PASSED IN: \n");
             for (let i = 0; i < actions.length; i++) {
                 console.log(actions[i].actions + " " + actions[i].frames);
             }
+            let curAction = actions.shift();
+            this.action = curAction.actions;
+            this.frames = curAction.frames;
+            console.log("CURRENT ACTOIN: " + this.action);
+            console.log("CURRENT FRAMES: " + this.frames);
+            
         }
 
         update() {
@@ -38,10 +41,12 @@
             if (!this.freeze) {
                 if (this.action = "LEFT") {
                     this.body.velocity.x = -150;
+                    console.log('LEFTTT');
                 }
 
                 else if (this.action = "RIGHT") {
                     this.body.velocity.x = 150;
+                    console.log("RIGHTTTT");
                 }
 
                 else {
@@ -62,6 +67,8 @@
                         let curAction = this.actions.shift();
                         this.action = curAction.actions;
                         this.frames = curAction.frames;
+                        console.log("CURRENT ACTOIN: " + this.action);
+                        console.log("CURRENT FRAMES: " + this.frames);
                     } else {
                         this.freeze = true;
                     }

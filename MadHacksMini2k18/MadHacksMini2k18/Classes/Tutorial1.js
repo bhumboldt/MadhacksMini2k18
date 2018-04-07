@@ -28,14 +28,11 @@ var MadHacks;
             ];
             _this.tiles = [];
             _this.traps = [];
-<<<<<<< HEAD
             _this.ghosts = [];
             _this.timer = 1000;
             _this.canPress = true;
-=======
             _this.collectibles = [];
             _this.score = 0;
->>>>>>> 08de73585ed54cb61368cb19e17e2d0fb12cca1a
             return _this;
         }
         Tutorial1.prototype.loadLevel = function () {
@@ -80,8 +77,7 @@ var MadHacks;
                 }
             }
             for (var i = 0; i < this.traps.length; i++) {
-<<<<<<< HEAD
-                this.game.physics.arcade.collide(this.player, this.traps[i], this.player.trapCollisionHandler, null, this);
+                this.game.physics.arcade.collide(this.player, this.traps[i], this.trapCollisionHandler, null, this);
                 for (var j = 0; j < this.ghosts.length; j++) {
                     this.game.physics.arcade.collide(this.ghosts[j], this.traps[i], this.ghosts[j].trapCollisionHandler, null, this);
                 }
@@ -91,14 +87,11 @@ var MadHacks;
                 this.player.actions.push(new MadHacks.PlayerActions(this.player.oldAction, this.player.frames));
                 this.player.frames = 0;
                 this.addGhost();
-=======
-                this.game.physics.arcade.collide(this.player, this.traps[i], this.trapCollisionHandler, null, this);
             }
             for (var i = 0; i < this.collectibles.length; i++) {
                 this.game.physics.arcade.overlap(this.player, this.collectibles[i], this.collectibleCollisionHandler, null, this);
             }
             if (this.game.physics.arcade.overlap(this.player, this.exit, this.exitCollisionHandler, null, this)) {
->>>>>>> 08de73585ed54cb61368cb19e17e2d0fb12cca1a
             }
         };
         Tutorial1.prototype.collectibleCollisionHandler = function (obj1, obj2) {

@@ -25,30 +25,15 @@ var MadHacks;
             _this.frames = 0;
             _this.oldAction = "WAIT";
             _this.currentAction = "WAIT";
-<<<<<<< HEAD
             _this.actions = new Array();
-=======
->>>>>>> 08de73585ed54cb61368cb19e17e2d0fb12cca1a
             return _this;
         }
         Player.prototype.preload = function () {
         };
         Player.prototype.update = function () {
-<<<<<<< HEAD
             //console.log(this.currentAction);
             if (this.isDead) {
                 this.game.state.restart(true, false);
-=======
-            if (this.isDead) {
-                this.game.state.restart(true, false);
-            }
-            // If player was and is waiting
-            if (this.pWait && this.currentAction === "WAIT") {
-                this.frames++;
-            }
-            else if (this.pRight && this.currentAction === "RIGHT") {
-                this.frames++;
->>>>>>> 08de73585ed54cb61368cb19e17e2d0fb12cca1a
             }
             // Get current action
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
@@ -66,13 +51,6 @@ var MadHacks;
                 this.actions.push(new MadHacks.PlayerActions(this.oldAction, this.frames));
                 this.frames = 0;
             }
-<<<<<<< HEAD
-=======
-            // Add jump to the action list
-            if (this.pJump) {
-                this.actions.push(new MadHacks.PlayerActions("JUMP", this.frames));
-            }
->>>>>>> 08de73585ed54cb61368cb19e17e2d0fb12cca1a
             // Movement for the player
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
                 this.oldAction = "LEFT";
@@ -105,15 +83,11 @@ var MadHacks;
             obj1.body.velocity.y = 0;
             obj1.isTouchingGround = true;
         };
-<<<<<<< HEAD
         Player.prototype.trapCollisionHandler = function (obj1, obj2) {
-            obj1.isDead = true;
             for (var i = 0; i < obj1.actions.length; i++) {
                 console.log(obj1.actions[i].actions + " " + obj1.actions[i].frames);
             }
         };
-=======
->>>>>>> 08de73585ed54cb61368cb19e17e2d0fb12cca1a
         return Player;
     }(Phaser.Sprite));
     MadHacks.Player = Player;
