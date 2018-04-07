@@ -57,6 +57,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Assets\LevelBackground.png" />
+    <Content Include="Assets\MainMenuBackground.png" />
     <Content Include="phaser2.png" />
     <Content Include="phaser.js" />
     <Content Include="README.md" />
