@@ -86,7 +86,6 @@
     <TypeScriptCompile Include="Classes\Boot.ts" />
     <TypeScriptCompile Include="Classes\Collectible.ts" />
     <TypeScriptCompile Include="Classes\Exit.ts" />
-    <TypeScriptCompile Include="Classes\EPlayerActions.ts" />
     <TypeScriptCompile Include="Classes\PlayerActions.ts" />
     <TypeScriptCompile Include="Classes\Ghost.ts" />
     <TypeScriptCompile Include="Classes\Tile.ts" />

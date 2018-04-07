@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Player = (function (_super) {
+    var Player = /** @class */ (function (_super) {
         __extends(Player, _super);
         function Player(game, x, y) {
             var _this = _super.call(this, game, x, y, 'Player', 0) || this;
@@ -19,19 +19,18 @@ var MadHacks;
             _this.anchor.setTo(0.5, 0);
             game.add.existing(_this);
             _this.isTouchingGround = true;
-<<<<<<< HEAD
             _this.pWait = true;
+            _this.isDead = false;
             _this.frames = 0;
             _this.currentAction = "WAIT";
-=======
-            _this.isDead = false;
->>>>>>> dafd9250b25fdf0cfe308f517e325ef695f904a7
             return _this;
         }
         Player.prototype.preload = function () {
         };
         Player.prototype.update = function () {
-<<<<<<< HEAD
+            if (this.isDead) {
+                this.game.state.restart(true, false);
+            }
             // If player was and is waiting
             if (this.pWait && this.currentAction === "WAIT") {
                 this.frames++;
@@ -49,10 +48,6 @@ var MadHacks;
             // Add jump to the action list
             if (this.pJump) {
                 this.actions.push(new MadHacks.PlayerActions("JUMP", this.frames));
-=======
-            if (this.isDead) {
-                this.game.state.restart(true, false);
->>>>>>> dafd9250b25fdf0cfe308f517e325ef695f904a7
             }
             // Movement for the player
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
@@ -90,12 +85,6 @@ var MadHacks;
         Player.prototype.collisionHandler = function (obj1, obj2) {
             obj1.body.velocity.y = 0;
             obj1.isTouchingGround = true;
-        };
-        Player.prototype.trapCollisionHandler = function (obj1, obj2) {
-            obj1.isDead = true;
-        };
-        Player.prototype.collectibleCollisionHandler = function (obj1, obj2) {
-            obj2.destroy(true);
         };
         return Player;
     }(Phaser.Sprite));

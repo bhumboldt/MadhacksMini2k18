@@ -108,14 +108,6 @@
             obj1.isTouchingGround = true;
 
         }
-
-        trapCollisionHandler(obj1: Player, obj2: Trap) {
-            obj1.isDead = true;
-        }
-
-        collectibleCollisionHandler(obj1: Player, obj2: Collectible) {
-            obj2.destroy(true);
-        }
 	}
 
 }

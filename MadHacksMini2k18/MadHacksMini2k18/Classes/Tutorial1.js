@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Tutorial1 = (function (_super) {
+    var Tutorial1 = /** @class */ (function (_super) {
         __extends(Tutorial1, _super);
         function Tutorial1() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -29,6 +29,7 @@ var MadHacks;
             _this.tiles = [];
             _this.traps = [];
             _this.collectibles = [];
+            _this.score = 0;
             return _this;
         }
         Tutorial1.prototype.loadLevel = function () {
@@ -63,16 +64,32 @@ var MadHacks;
                 this.game.physics.arcade.collide(this.player, this.tiles[i], this.player.collisionHandler, null, this);
             }
             for (var i = 0; i < this.traps.length; i++) {
-                this.game.physics.arcade.collide(this.player, this.traps[i], this.player.trapCollisionHandler, null, this);
+                this.game.physics.arcade.collide(this.player, this.traps[i], this.trapCollisionHandler, null, this);
             }
             for (var i = 0; i < this.collectibles.length; i++) {
-                this.game.physics.arcade.overlap(this.player, this.collectibles[i], this.player.collectibleCollisionHandler, null, this);
+                this.game.physics.arcade.overlap(this.player, this.collectibles[i], this.collectibleCollisionHandler, null, this);
             }
+        };
+        Tutorial1.prototype.collectibleCollisionHandler = function (obj1, obj2) {
+            obj2.destroy(true);
+            this.score++;
+            this.scoreText.text = 'Score: ' + this.score;
+        };
+        Tutorial1.prototype.trapCollisionHandler = function (obj1, obj2) {
+            obj1.isDead = true;
+            this.score = 0;
+            this.scoreText.text = 'Score: ' + this.score;
         };
         // Create
         Tutorial1.prototype.create = function () {
             this.background = this.add.sprite(0, 0, 'Background');
             this.loadLevel();
+            this.scoreText = this.game.add.text(10, 10, 'Score: ' + this.score, {
+                font: '15px Arial'
+            });
+        };
+        Tutorial1.prototype.restart = function () {
+            this.score = 0;
         };
         return Tutorial1;
     }(Phaser.State));

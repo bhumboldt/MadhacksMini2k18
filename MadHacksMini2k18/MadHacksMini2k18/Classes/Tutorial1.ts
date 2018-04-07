@@ -17,6 +17,8 @@
         exit: MadHacks.Exit;
         traps = [];
         collectibles = [];
+        score = 0;
+        scoreText: Phaser.Text;
 
         loadLevel() {
             for (let i = 0; i < this.level.length; i++) {
@@ -59,13 +61,26 @@
             }
 
             for (let i = 0; i < this.traps.length; i++) {
-                this.game.physics.arcade.collide(this.player, this.traps[i], this.player.trapCollisionHandler, null, this);
+                this.game.physics.arcade.collide(this.player, this.traps[i], this.trapCollisionHandler, null, this);
             }
 
             for (let i = 0; i < this.collectibles.length; i++) {
-                this.game.physics.arcade.overlap(this.player, this.collectibles[i], this.player.collectibleCollisionHandler, null, this);
+                this.game.physics.arcade.overlap(this.player, this.collectibles[i], this.collectibleCollisionHandler, null, this);
             }
-		}
+        }
+
+        collectibleCollisionHandler(obj1: Player, obj2: Collectible) {
+            obj2.destroy(true);
+            this.score++;
+            this.scoreText.text = 'Score: ' + this.score;
+        }
+
+
+        trapCollisionHandler(obj1: Player, obj2: Trap) {
+            obj1.isDead = true;
+            this.score = 0;
+            this.scoreText.text = 'Score: ' + this.score;
+        }
 
 		// Properties
 		background: Phaser.Sprite;
@@ -74,10 +89,15 @@
 
 		// Create
         create() {
-			this.background = this.add.sprite(0, 0, 'Background');
-
+            this.background = this.add.sprite(0, 0, 'Background');
             this.loadLevel();
+            this.scoreText = this.game.add.text(10, 10, 'Score: ' + this.score, {
+                font: '15px Arial'
+            });
+        }
 
-		}
+        restart() {
+            this.score = 0;
+        }
 	}
 }
