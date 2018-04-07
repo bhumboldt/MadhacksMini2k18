@@ -1,18 +1,18 @@
 ﻿module MadHacks {
-
-	export class Tutorial1 extends Phaser.State {
+    export class Tutorial2 extends Phaser.State {
         level = [
-            'xxxxxxxxxxxxxxxxxxxx',
+            'xxxxxxxxxxxxxxxexxxx',
             'x                  x',
             'x                  x',
-            'x                  x',
-            'x                  x',
+            'x t                x',
+            'x             c   xx',
             'x        c         x',
-            'x                  x',
-            'x                  x',
-            'x p       t        x',
-            'xxxxxxxxxxxxxxxxxxex'
+            'x             c   xx',
+            'x   c              x',
+            'x p          t     x',
+            'xxxxxxxxxxxxxxxxxtxx'
         ]
+
         tiles = [];
         exit: MadHacks.Exit;
         traps = [];
@@ -50,9 +50,9 @@
             }
         }
 
-		preload() {
-			
-		}
+        preload() {
+
+        }
 
         update() {
             for (let i = 0; i < this.tiles.length; i++) {
@@ -90,12 +90,12 @@
             this.game.state.start('Tutorial2');
         }
 
-		// Properties
-		background: Phaser.Sprite;
-		music: Phaser.Sound;
-		player: MadHacks.Player;
+        // Properties
+        background: Phaser.Sprite;
+        music: Phaser.Sound;
+        player: MadHacks.Player;
 
-		// Create
+        // Create
         create() {
             this.background = this.add.sprite(0, 0, 'Background');
             this.loadLevel();
@@ -107,5 +107,5 @@
         restart() {
             this.score = 0;
         }
-	}
+    }
 }

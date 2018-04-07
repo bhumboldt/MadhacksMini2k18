@@ -10,21 +10,21 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Tutorial1 = /** @class */ (function (_super) {
-        __extends(Tutorial1, _super);
-        function Tutorial1() {
+    var Tutorial2 = /** @class */ (function (_super) {
+        __extends(Tutorial2, _super);
+        function Tutorial2() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
             _this.level = [
-                'xxxxxxxxxxxxxxxxxxxx',
+                'xxxxxxxxxxxxxxxexxxx',
                 'x                  x',
                 'x                  x',
-                'x                  x',
-                'x                  x',
+                'x t                x',
+                'x             c   xx',
                 'x        c         x',
-                'x                  x',
-                'x                  x',
-                'x p       t        x',
-                'xxxxxxxxxxxxxxxxxxex'
+                'x             c   xx',
+                'x   c              x',
+                'x p          t     x',
+                'xxxxxxxxxxxxxxxxxtxx'
             ];
             _this.tiles = [];
             _this.traps = [];
@@ -32,7 +32,7 @@ var MadHacks;
             _this.score = 0;
             return _this;
         }
-        Tutorial1.prototype.loadLevel = function () {
+        Tutorial2.prototype.loadLevel = function () {
             for (var i = 0; i < this.level.length; i++) {
                 for (var j = 0; j < this.level[i].length; j++) {
                     if (this.level[i][j] === 'x') {
@@ -57,9 +57,9 @@ var MadHacks;
                 }
             }
         };
-        Tutorial1.prototype.preload = function () {
+        Tutorial2.prototype.preload = function () {
         };
-        Tutorial1.prototype.update = function () {
+        Tutorial2.prototype.update = function () {
             for (var i = 0; i < this.tiles.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.tiles[i], this.player.collisionHandler, null, this);
             }
@@ -72,32 +72,32 @@ var MadHacks;
             if (this.game.physics.arcade.overlap(this.player, this.exit, this.exitCollisionHandler, null, this)) {
             }
         };
-        Tutorial1.prototype.collectibleCollisionHandler = function (obj1, obj2) {
+        Tutorial2.prototype.collectibleCollisionHandler = function (obj1, obj2) {
             obj2.destroy(true);
             this.score++;
             this.scoreText.text = 'Score: ' + this.score;
         };
-        Tutorial1.prototype.trapCollisionHandler = function (obj1, obj2) {
+        Tutorial2.prototype.trapCollisionHandler = function (obj1, obj2) {
             obj1.isDead = true;
             this.score = 0;
             this.scoreText.text = 'Score: ' + this.score;
         };
-        Tutorial1.prototype.exitCollisionHandler = function (obj1, obj2) {
+        Tutorial2.prototype.exitCollisionHandler = function (obj1, obj2) {
             this.game.state.start('Tutorial2');
         };
         // Create
-        Tutorial1.prototype.create = function () {
+        Tutorial2.prototype.create = function () {
             this.background = this.add.sprite(0, 0, 'Background');
             this.loadLevel();
             this.scoreText = this.game.add.text(10, 10, 'Score: ' + this.score, {
                 font: '15px Arial'
             });
         };
-        Tutorial1.prototype.restart = function () {
+        Tutorial2.prototype.restart = function () {
             this.score = 0;
         };
-        return Tutorial1;
+        return Tutorial2;
     }(Phaser.State));
-    MadHacks.Tutorial1 = Tutorial1;
+    MadHacks.Tutorial2 = Tutorial2;
 })(MadHacks || (MadHacks = {}));
-//# sourceMappingURL=Tutorial1.js.map
+//# sourceMappingURL=Tutorial2.js.map
