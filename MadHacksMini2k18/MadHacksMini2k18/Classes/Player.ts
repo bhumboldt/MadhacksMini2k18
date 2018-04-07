@@ -2,7 +2,8 @@
 
 	export class Player extends Phaser.Sprite{
 		sprite: string;
-        isTouchingGround: boolean;
+        canJump: boolean;
+        jumpTimer: number;
         pLeft: boolean;
         isDead = true;
         isGhost = false;
@@ -23,7 +24,8 @@
 			this.game.physics.arcade.enableBody(this);
 			this.anchor.setTo(0.5, 0);
             game.add.existing(this);
-            this.isTouchingGround = true;
+            this.canJump = false;
+            this.jumpTimer = 0;
             this.pWait = true;
             this.isDead = false;
             this.frames = 0;
@@ -37,7 +39,14 @@
             if (this.isDead) {
                 this.game.state.restart(true, false);
             }
-
+            if (this.body.velocity.y === 0) {
+                if (this.jumpTimer === 0) {
+                    this.canJump = true;
+                } else {
+                    this.jumpTimer = 0;
+                    console.log("reduce timer");
+                }
+            }
             // Get current action
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) this.currentAction = "LEFT";
             else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) this.currentAction = "RIGHT";
@@ -73,9 +82,12 @@
 
 			// Jumping
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-				if (this.isTouchingGround) {
+                console.log("is jumping");
+                if (this.canJump) {
+                    console.log("jumping");
                     this.body.velocity.y = -250;
-                    this.isTouchingGround = false;
+                    this.jumpTimer = 1;
+                    this.canJump = false;
                     this.actions.push(new PlayerActions(this.oldAction, this.frames));
                     this.actions.push(new PlayerActions("JUMP", this.frames));
                     this.frames = 0;

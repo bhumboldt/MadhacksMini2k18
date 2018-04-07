@@ -17,6 +17,7 @@
             super(game, x, y, 'Player', 0);
             this.game.physics.arcade.enableBody(this);
             this.anchor.setTo(0.5, 0);
+            //this.body.immovable = true;
             game.add.existing(this);
             this.isTouchingGround = true;
             this.actions = JSON.parse(JSON.stringify(actions));
@@ -33,9 +34,7 @@
         }
 
         update() {
-            if (this.isDead) {
-                this.destroy();
-            }
+
             console.log("Ghost action: " + this.action);
 
             if (!this.freeze) {
@@ -60,10 +59,11 @@
                         this.body.velocity.y = -250;
                         this.isTouchingGround = false;
                     }
+                    this.frames = 0;
                 }
 
                 this.frames--;
-                if (this.frames == 0) {
+                if (this.frames <= 0) {
                     if (this.actions.length > 0) {
                         let curAction = this.actions.shift();
                         this.action = curAction.actions;
@@ -84,6 +84,7 @@
 
         trapCollisionHandler(obj1: Ghost, obj2: Trap) {
             obj1.isDead = true;
+            obj1.destroy();
             for (let i = 0; i < obj1.actions.length; i++) {
                 //console.log(obj1.actions[i].actions + " " + obj1.actions[i].frames);
             }

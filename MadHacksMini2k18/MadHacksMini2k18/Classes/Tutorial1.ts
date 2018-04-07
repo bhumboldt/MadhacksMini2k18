@@ -95,6 +95,10 @@
             if (this.game.physics.arcade.overlap(this.player, this.exit, this.exitCollisionHandler, null, this)) {
 
             }
+
+            for (let i = 0; i < this.ghosts.length; i++) {
+                this.game.physics.arcade.collide(this.player, this.ghosts[i], this.ghostCollisionHandler, null, this);
+            }
         }
 
         collectibleCollisionHandler(obj1: Player, obj2: Collectible) {
@@ -103,6 +107,9 @@
             this.scoreText.text = 'Score: ' + this.score;
         }
 
+        ghostCollisionHandler(obj1: Player, obj2: Ghost) {
+
+        }
 
         trapCollisionHandler(obj1: Player, obj2: Trap) {
             obj1.isDead = true;

@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Tutorial1 = /** @class */ (function (_super) {
+    var Tutorial1 = (function (_super) {
         __extends(Tutorial1, _super);
         function Tutorial1() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -93,11 +93,16 @@ var MadHacks;
             }
             if (this.game.physics.arcade.overlap(this.player, this.exit, this.exitCollisionHandler, null, this)) {
             }
+            for (var i = 0; i < this.ghosts.length; i++) {
+                this.game.physics.arcade.collide(this.player, this.ghosts[i], this.ghostCollisionHandler, null, this);
+            }
         };
         Tutorial1.prototype.collectibleCollisionHandler = function (obj1, obj2) {
             obj2.destroy(true);
             this.score++;
             this.scoreText.text = 'Score: ' + this.score;
+        };
+        Tutorial1.prototype.ghostCollisionHandler = function (obj1, obj2) {
         };
         Tutorial1.prototype.trapCollisionHandler = function (obj1, obj2) {
             obj1.isDead = true;
