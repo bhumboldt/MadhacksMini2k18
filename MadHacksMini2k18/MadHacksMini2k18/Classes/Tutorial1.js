@@ -17,15 +17,17 @@ var MadHacks;
         }
         Tutorial1.prototype.preload = function () {
             this.game.load.image('background', 'Assets/LevelBackground.png');
+            this.game.load.image('player', 'Assets/Player.png');
         };
         Tutorial1.prototype.update = function () {
         };
         // Create
         Tutorial1.prototype.create = function () {
-            console.log('suck me');
             this.background = this.add.sprite(0, 0, 'background');
             // Place player at location
-            //this.player = new Player(this.game, 130, 284);
+            this.player = new MadHacks.Player(this.game, 50, 50);
+            this.player.body.collideWorldBounds = true;
+            //this.player.body.bounce.y = 0.8;
         };
         return Tutorial1;
     }(Phaser.State));

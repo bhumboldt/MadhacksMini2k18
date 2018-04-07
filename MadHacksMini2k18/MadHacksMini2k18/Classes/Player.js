@@ -17,6 +17,7 @@ var MadHacks;
             _this.game.physics.arcade.enableBody(_this);
             _this.anchor.setTo(0.5, 0);
             game.add.existing(_this);
+            _this.isTouchingGround = true;
             return _this;
         }
         Player.prototype.preload = function () {
@@ -33,11 +34,11 @@ var MadHacks;
                 this.body.velocity.x = 0;
             }
             // Jumping
-            //if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-            //	if (!this.isTouchingGround) {
-            //		this.body.velocity.y = -150;
-            //	} 
-            //}
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+                if (this.isTouchingGround) {
+                    this.body.velocity.y = -150;
+                }
+            }
         };
         Player.prototype.create = function () {
         };

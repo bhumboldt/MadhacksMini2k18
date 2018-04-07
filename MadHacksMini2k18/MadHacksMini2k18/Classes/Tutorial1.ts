@@ -17,13 +17,13 @@
 		player: MadHacks.Player;
 
 		// Create
-		create() {
-			console.log('suck me');
-
+        create() {
 			this.background = this.add.sprite(0, 0, 'background');
 
 			// Place player at location
-			this.player = new Player(this.game, 50, 50);
+            this.player = new Player(this.game, 50, 50);
+            this.player.body.collideWorldBounds = true;
+            //this.player.body.bounce.y = 0.8;
 
 		}
 	}

@@ -17,6 +17,8 @@ var MadHacks;
         }
         Boot.prototype.init = function () {
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
+            // Add global gravity
+            this.game.physics.arcade.gravity.y = 500;
             // Desktop setup
             this.scale.pageAlignHorizontally = true;
         };

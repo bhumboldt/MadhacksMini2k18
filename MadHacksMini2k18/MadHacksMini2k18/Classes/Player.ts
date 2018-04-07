@@ -13,8 +13,8 @@
 			super(game, x, y, 'player', 0);
 			this.game.physics.arcade.enableBody(this);
 			this.anchor.setTo(0.5, 0);
-			game.add.existing(this);
-
+            game.add.existing(this);
+            this.isTouchingGround = true;
 		}
 		update() {
 
@@ -32,11 +32,11 @@
 			}
 
 			// Jumping
-			//if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-			//	if (!this.isTouchingGround) {
-			//		this.body.velocity.y = -150;
-			//	} 
-			//}
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+				if (this.isTouchingGround) {
+		        	this.body.velocity.y = -150;
+				} 
+			}
 
 		}
 
