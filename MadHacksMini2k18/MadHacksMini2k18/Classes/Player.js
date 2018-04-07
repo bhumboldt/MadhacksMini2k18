@@ -12,10 +12,32 @@ var MadHacks;
 (function (MadHacks) {
     var Player = (function (_super) {
         __extends(Player, _super);
-        function Player() {
-            return _super !== null && _super.apply(this, arguments) || this;
+        function Player(game, x, y) {
+            var _this = _super.call(this, game, x, y, 'player', 0) || this;
+            _this.game.physics.arcade.enableBody(_this);
+            _this.anchor.setTo(0.5, 0);
+            game.add.existing(_this);
+            return _this;
         }
+        Player.prototype.preload = function () {
+        };
         Player.prototype.update = function () {
+            // Movement for the player
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
+                this.body.velocity.x = -150;
+            }
+            else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+                this.body.velocity.x = 150;
+            }
+            else {
+                this.body.velocity.x = 0;
+            }
+            // Jumping
+            //if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+            //	if (!this.isTouchingGround) {
+            //		this.body.velocity.y = -150;
+            //	} 
+            //}
         };
         Player.prototype.create = function () {
         };

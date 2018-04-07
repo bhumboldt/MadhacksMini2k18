@@ -17,6 +17,7 @@ var MadHacks;
         }
         Tutorial1.prototype.preload = function () {
             this.game.load.image('background', 'Assets/LevelBackground.png');
+            this.game.load.image('player', 'Assets/Player.png');
         };
         Tutorial1.prototype.update = function () {
         };
@@ -25,7 +26,7 @@ var MadHacks;
             console.log('suck me');
             this.background = this.add.sprite(0, 0, 'background');
             // Place player at location
-            //this.player = new Player(this.game, 130, 284);
+            this.player = new MadHacks.Player(this.game, 50, 50);
         };
         return Tutorial1;
     }(Phaser.State));
