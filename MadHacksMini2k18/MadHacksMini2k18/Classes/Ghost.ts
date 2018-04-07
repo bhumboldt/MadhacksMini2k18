@@ -39,27 +39,28 @@
             console.log("Ghost action: " + this.action);
 
             if (!this.freeze) {
-                if (this.action = "LEFT") {
+                if (this.action === "LEFT") {
                     this.body.velocity.x = -150;
                     console.log('LEFTTT');
                 }
 
-                else if (this.action = "RIGHT") {
+                else if (this.action === "RIGHT") {
                     this.body.velocity.x = 150;
                     console.log("RIGHTTTT");
                 }
 
                 else {
                     this.body.velocity.x = 0;
+                    console.log("WAIIITTTT");
                 }
 
                 // Jumping
-                //if (this.action = "JUMP") {
-                //    if (this.isTouchingGround) {
-                //        this.body.velocity.y = -250;
-                //        this.isTouchingGround = false;
-                //    }
-                //}
+                if (this.action === "JUMP") {
+                    if (this.isTouchingGround) {
+                        this.body.velocity.y = -250;
+                        this.isTouchingGround = false;
+                    }
+                }
 
                 this.frames--;
                 if (this.frames == 0) {
