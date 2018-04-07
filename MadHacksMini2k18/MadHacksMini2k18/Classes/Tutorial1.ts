@@ -54,6 +54,7 @@
 
         update() {
             for (let i = 0; i < this.tiles.length; i++) {
+
                 this.game.physics.arcade.collide(this.player, this.tiles[i], this.player.collisionHandler, null, this);
             }
 

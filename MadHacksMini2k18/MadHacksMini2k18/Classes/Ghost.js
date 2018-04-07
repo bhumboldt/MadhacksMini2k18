@@ -10,19 +10,20 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Game = (function (_super) {
-        __extends(Game, _super);
-        function Game() {
-            var _this = _super.call(this, 640, 320, Phaser.AUTO, 'content', null) || this;
-            _this.state.add('Boot', MadHacks.Boot, false);
-            _this.state.add('Preloader', MadHacks.Preloader, false);
-            _this.state.add('MainMenu', MadHacks.MainMenu, false);
-            _this.state.add('Tutorial1', MadHacks.Tutorial1, false);
-            _this.state.start('Boot');
+    var Ghost = (function (_super) {
+        __extends(Ghost, _super);
+        function Ghost(game, x, y) {
+            var _this = _super.call(this, game, x, y, 'Player', 0) || this;
+            _this.game.physics.arcade.enableBody(_this);
+            _this.anchor.setTo(0.5, 0);
+            game.add.existing(_this);
+            _this.isTouchingGround = true;
             return _this;
         }
-        return Game;
-    }(Phaser.Game));
-    MadHacks.Game = Game;
+        Ghost.prototype.preload = function () {
+        };
+        return Ghost;
+    }(Phaser.Sprite));
+    MadHacks.Ghost = Ghost;
 })(MadHacks || (MadHacks = {}));
-//# sourceMappingURL=Game.js.map
+//# sourceMappingURL=Ghost.js.map

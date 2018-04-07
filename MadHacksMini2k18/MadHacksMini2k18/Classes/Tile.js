@@ -10,14 +10,13 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Tile = /** @class */ (function (_super) {
+    var Tile = (function (_super) {
         __extends(Tile, _super);
         function Tile(game, x, y) {
             var _this = _super.call(this, game, x, y, 'Tile', 0) || this;
             _this.game.physics.arcade.enableBody(_this);
             _this.body.allowGravity = false;
             _this.body.immovable = true;
-            //this.anchor.setTo(0.5, 0);
             game.add.existing(_this);
             return _this;
         }
