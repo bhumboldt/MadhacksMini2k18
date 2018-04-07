@@ -16,14 +16,14 @@ var MadHacks;
             var _this = _super !== null && _super.apply(this, arguments) || this;
             _this.level = [
                 'xxxxxxxxxxxxxxxxxxxx',
-                'w                  w',
-                'w                  w',
-                'w                  w',
-                'w                  w',
-                'w        c         w',
-                'w         w        w',
-                'w s       w        w',
-                'w p       w        w',
+                'x                  w',
+                'x                  w',
+                'x                  w',
+                'x                  w',
+                'x        c         w',
+                'x         w        w',
+                'x s       w        w',
+                'x p       w        w',
                 'xxxxxxxxxxxxxxxxxxex'
             ];
             _this.tiles = [];

@@ -94,8 +94,10 @@
         }
 
         collisionHandler(obj1: Player, obj2) {
-            obj1.body.velocity.y = 0;
-            obj1.canJump = true;
+            if (obj2.y - (obj1.y + obj1.height) < 1 && obj2.y - (obj1.y + obj1.height) >= 0) {
+                obj1.body.velocity.y = 0;
+                obj1.canJump = true;
+            }
         }
 
         trapCollisionHandler(obj1: Player, obj2: Trap) {

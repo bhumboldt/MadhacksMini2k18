@@ -83,8 +83,10 @@ var MadHacks;
             // this.game.input.onDown.addOnce()
         };
         Player.prototype.collisionHandler = function (obj1, obj2) {
-            obj1.body.velocity.y = 0;
-            obj1.canJump = true;
+            if (obj2.y - (obj1.y + obj1.height) < 1 && obj2.y - (obj1.y + obj1.height) >= 0) {
+                obj1.body.velocity.y = 0;
+                obj1.canJump = true;
+            }
         };
         Player.prototype.trapCollisionHandler = function (obj1, obj2) {
             for (var i = 0; i < obj1.actions.length; i++) {

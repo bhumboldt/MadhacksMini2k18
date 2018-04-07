@@ -3,14 +3,14 @@
 	export class Level extends Phaser.State {
         level = [
             'xxxxxxxxxxxxxxxxxxxx',
-            'w                  w',
-            'w                  w',
-            'w                  w',
-            'w                  w',
-            'w        c         w',
-            'w         w        w',
-            'w s       w        w',
-            'w p       w        w',
+            'x                  w',
+            'x                  w',
+            'x                  w',
+            'x                  w',
+            'x        c         w',
+            'x         w        w',
+            'x s       w        w',
+            'x p       w        w',
             'xxxxxxxxxxxxxxxxxxex'
         ]
         tiles = [];
