@@ -16,7 +16,11 @@
 
             super(game, x, y, 'Player', 0);
             this.game.physics.arcade.enableBody(this);
+<<<<<<< HEAD
+            this.anchor.setTo(0.5, 0);
             //this.body.immovable = true;
+=======
+>>>>>>> 426f9e19ef2eb85fad9dbcdf904486ea4876907b
             game.add.existing(this);
             this.isTouchingGround = true;
             this.actions = JSON.parse(JSON.stringify(actions));

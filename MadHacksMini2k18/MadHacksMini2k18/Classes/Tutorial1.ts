@@ -22,6 +22,8 @@
         collectibles = [];
         score = 0;
         scoreText: Phaser.Text;
+        ghostTexts = [];
+
         loadLevel() {
             for (let i = 0; i < this.level.length; i++) {
                 for (let j = 0; j < this.level[i].length; j++) {
@@ -57,6 +59,11 @@
 		}
 
         update() {
+            for (let i = 0; i < this.ghostTexts.length; i++) {
+                this.ghostTexts[i].x = Math.floor(this.ghosts[i].x + this.ghosts[i].width / 2);
+                this.ghostTexts[i].y = Math.floor(this.ghosts[i].y + this.ghosts[i].height / 2);
+            }
+
             if (!this.canPress) {
                 this.timer--;
             }
@@ -141,7 +148,14 @@
 
         // Adds a ghost to the level
         addGhost() {
-            this.ghosts.push(new Ghost(this.game, 100, 100, this.player.actions));
+            let ghost = new Ghost(this.game, this.player.originalX, this.player.originalY, this.player.actions);
+            this.ghosts.push(ghost);
+            let ghostText = this.game.add.text(Math.floor(ghost.x + ghost.width / 2), Math.floor(ghost.y + ghost.height / 2), '' + this.ghosts.length);
+            ghostText.anchor.set(0.5);
+            this.ghostTexts.push(ghostText);
+            this.player.actions = this.player.actions.splice(0, this.player.actions.length);
+            this.player.originalY = this.player.y;
+            this.player.originalX = this.player.x;
         }
 	}
 }
