@@ -8,9 +8,9 @@
             'x                  w',
             'x                  w',
             'x        c         w',
-            'x         w        w',
-            'x s       w        w',
-            'x p       w        w',
+            'x         x        w',
+            'x s       x        w',
+            'x p       x        w',
             'xxxxxxxxxxxxxxxxxxex'
         ]
         tiles = [];
