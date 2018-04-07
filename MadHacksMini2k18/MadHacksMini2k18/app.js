@@ -8,6 +8,8 @@ var MadHacksMini2k18 = /** @class */ (function () {
     MadHacksMini2k18.prototype.create = function () {
         var logo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo');
         logo.anchor.setTo(0.5, 0.5);
+        this.game.state.add('tutorial1', new Tutorial1());
+        this.game.state.start('tutorial1');
     };
     return MadHacksMini2k18;
 }());
