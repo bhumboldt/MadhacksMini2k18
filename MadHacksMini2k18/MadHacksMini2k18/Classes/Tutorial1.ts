@@ -7,7 +7,7 @@
             'x                  x',
             'x                  x',
             'x                  x',
-            'x                  x',
+            'x        c         x',
             'x                  x',
             'x                  x',
             'x p       t        x',
@@ -16,6 +16,7 @@
         tiles = [];
         exit: MadHacks.Exit;
         traps = [];
+        collectibles = [];
 
         loadLevel() {
             for (let i = 0; i < this.level.length; i++) {
@@ -38,6 +39,11 @@
                         let trap = new Trap(this.game, j * 32, i * 32);
                         this.traps.push(trap);
                     }
+
+                    if (this.level[i][j] === 'c') {
+                        let collectible = new Collectible(this.game, j * 32, i * 32);
+                        this.collectibles.push(collectible);
+                    }
                 }
             }
         }
@@ -53,6 +59,10 @@
 
             for (let i = 0; i < this.traps.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.traps[i], this.player.trapCollisionHandler, null, this);
+            }
+
+            for (let i = 0; i < this.collectibles.length; i++) {
+                this.game.physics.arcade.overlap(this.player, this.collectibles[i], this.player.collectibleCollisionHandler, null, this);
             }
 		}
 

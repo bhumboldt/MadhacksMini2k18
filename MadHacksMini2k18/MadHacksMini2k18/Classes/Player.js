@@ -55,6 +55,9 @@ var MadHacks;
         Player.prototype.trapCollisionHandler = function (obj1, obj2) {
             obj1.isDead = true;
         };
+        Player.prototype.collectibleCollisionHandler = function (obj1, obj2) {
+            obj2.destroy(true);
+        };
         return Player;
     }(Phaser.Sprite));
     MadHacks.Player = Player;

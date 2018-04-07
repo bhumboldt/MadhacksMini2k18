@@ -20,7 +20,7 @@ var MadHacks;
                 'x                  x',
                 'x                  x',
                 'x                  x',
-                'x                  x',
+                'x        c         x',
                 'x                  x',
                 'x                  x',
                 'x p       t        x',
@@ -28,6 +28,7 @@ var MadHacks;
             ];
             _this.tiles = [];
             _this.traps = [];
+            _this.collectibles = [];
             return _this;
         }
         Tutorial1.prototype.loadLevel = function () {
@@ -48,6 +49,10 @@ var MadHacks;
                         var trap = new MadHacks.Trap(this.game, j * 32, i * 32);
                         this.traps.push(trap);
                     }
+                    if (this.level[i][j] === 'c') {
+                        var collectible = new MadHacks.Collectible(this.game, j * 32, i * 32);
+                        this.collectibles.push(collectible);
+                    }
                 }
             }
         };
@@ -59,6 +64,9 @@ var MadHacks;
             }
             for (var i = 0; i < this.traps.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.traps[i], this.player.trapCollisionHandler, null, this);
+            }
+            for (var i = 0; i < this.collectibles.length; i++) {
+                this.game.physics.arcade.overlap(this.player, this.collectibles[i], this.player.collectibleCollisionHandler, null, this);
             }
         };
         // Create

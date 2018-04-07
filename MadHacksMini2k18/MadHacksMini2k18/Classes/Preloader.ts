@@ -8,6 +8,7 @@
             this.load.image('Tile', 'Assets/Tile.png');
             this.load.image('Exit', 'Assets/Exit.png');
             this.load.image('Trap', 'Assets/Trap.png');
+            this.load.image('Collectible', 'Assets/Collectible.png');
         }
 
         create() {

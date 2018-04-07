@@ -56,6 +56,7 @@
     <TypeScriptSourceRoot />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Assets\Collectible.png" />
     <Content Include="Assets\Exit.png" />
     <Content Include="Assets\LevelBackground.png" />
     <Content Include="Assets\MainMenuBackground.png" />
@@ -83,6 +84,7 @@
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="box2d.d.ts" />
     <TypeScriptCompile Include="Classes\Boot.ts" />
+    <TypeScriptCompile Include="Classes\Collectible.ts" />
     <TypeScriptCompile Include="Classes\Exit.ts" />
     <TypeScriptCompile Include="Classes\Tile.ts" />
     <TypeScriptCompile Include="Classes\Game.ts" />
