@@ -30,15 +30,15 @@ var MadHacks;
                 ],
                 [
                     'xxxxxxxxxxxxxxxexxxx',
-                    'x px               x',
-                    'xxxx    x          x',
+                    'x  x               x',
+                    'x px    x          x',
+                    'xxxx    xxxxx      x',
                     'x       x          x',
-                    'x       xxxxxxx   xx',
-                    'x       x          x',
-                    'x       x      t   x',
-                    'x     t x   xxxxxxxx',
+                    'x       x       e  x',
+                    'x       x   xxxxxxxx',
+                    'x     t x          x',
                     'x   e   x       s  x',
-                    'xxxxxxxxxxxxxxxxxtxx'
+                    'xxxxxxxxxxxxxxxxxxxx'
                 ]
             ];
         }
