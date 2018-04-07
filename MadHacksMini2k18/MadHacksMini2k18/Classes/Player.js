@@ -16,6 +16,8 @@ var MadHacks;
             var _this = _super.call(this, game, x, y, 'Player', 0) || this;
             _this.isDead = true;
             _this.isGhost = false;
+            _this.originalX = 0;
+            _this.originalY = 0;
             _this.game.physics.arcade.enableBody(_this);
             _this.anchor.setTo(0.5, 0);
             game.add.existing(_this);
@@ -26,6 +28,8 @@ var MadHacks;
             _this.oldAction = "WAIT";
             _this.currentAction = "WAIT";
             _this.actions = new Array();
+            _this.originalX = _this.x;
+            _this.originalY = _this.y;
             return _this;
         }
         Player.prototype.preload = function () {

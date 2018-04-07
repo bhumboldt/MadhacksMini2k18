@@ -15,7 +15,6 @@ var MadHacks;
         function Ghost(game, x, y, actions) {
             var _this = _super.call(this, game, x, y, 'Player', 0) || this;
             _this.game.physics.arcade.enableBody(_this);
-            _this.anchor.setTo(0.5, 0);
             game.add.existing(_this);
             _this.isTouchingGround = true;
             _this.actions = JSON.parse(JSON.stringify(actions));
@@ -58,7 +57,7 @@ var MadHacks;
                     }
                 }
                 this.frames--;
-                if (this.frames == 0) {
+                if (this.frames <= 0) {
                     if (this.actions.length > 0) {
                         var curAction = this.actions.shift();
                         this.action = curAction.actions;

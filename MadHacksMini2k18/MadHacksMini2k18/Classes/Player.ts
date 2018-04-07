@@ -13,6 +13,8 @@
         frames: number;
         oldAction: string;
         currentAction: string;
+        originalX = 0;
+        originalY = 0;
 		preload() {
 
 		}
@@ -30,6 +32,8 @@
             this.oldAction = "WAIT";
             this.currentAction = "WAIT";
             this.actions = new Array<PlayerActions>();
+            this.originalX = this.x;
+            this.originalY = this.y;
         }
 
         update() {

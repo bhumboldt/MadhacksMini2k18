@@ -33,6 +33,7 @@ var MadHacks;
             _this.canPress = true;
             _this.collectibles = [];
             _this.score = 0;
+            _this.ghostTexts = [];
             return _this;
         }
         Tutorial1.prototype.loadLevel = function () {
@@ -63,6 +64,10 @@ var MadHacks;
         Tutorial1.prototype.preload = function () {
         };
         Tutorial1.prototype.update = function () {
+            for (var i = 0; i < this.ghostTexts.length; i++) {
+                this.ghostTexts[i].x = Math.floor(this.ghosts[i].x + this.ghosts[i].width / 2);
+                this.ghostTexts[i].y = Math.floor(this.ghosts[i].y + this.ghosts[i].height / 2);
+            }
             if (!this.canPress) {
                 this.timer--;
             }
@@ -120,7 +125,14 @@ var MadHacks;
         };
         // Adds a ghost to the level
         Tutorial1.prototype.addGhost = function () {
-            this.ghosts.push(new MadHacks.Ghost(this.game, 100, 100, this.player.actions));
+            var ghost = new MadHacks.Ghost(this.game, this.player.originalX, this.player.originalY, this.player.actions);
+            this.ghosts.push(ghost);
+            var ghostText = this.game.add.text(Math.floor(ghost.x + ghost.width / 2), Math.floor(ghost.y + ghost.height / 2), '' + this.ghosts.length);
+            ghostText.anchor.set(0.5);
+            this.ghostTexts.push(ghostText);
+            this.player.actions = this.player.actions.splice(0, this.player.actions.length);
+            this.player.originalY = this.player.y;
+            this.player.originalX = this.player.x;
         };
         return Tutorial1;
     }(Phaser.State));

@@ -16,7 +16,6 @@
 
             super(game, x, y, 'Player', 0);
             this.game.physics.arcade.enableBody(this);
-            this.anchor.setTo(0.5, 0);
             game.add.existing(this);
             this.isTouchingGround = true;
             this.actions = JSON.parse(JSON.stringify(actions));
@@ -63,7 +62,7 @@
                 }
 
                 this.frames--;
-                if (this.frames == 0) {
+                if (this.frames <= 0) {
                     if (this.actions.length > 0) {
                         let curAction = this.actions.shift();
                         this.action = curAction.actions;
