@@ -1,4 +1,4 @@
-﻿class Tutorial1 {
+﻿export class Tutorial1 {
 
     constructor() {
 

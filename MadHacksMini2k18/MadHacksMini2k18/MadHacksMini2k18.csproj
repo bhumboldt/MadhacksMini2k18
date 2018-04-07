@@ -76,14 +76,18 @@
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="box2d.d.ts" />
+    <TypeScriptCompile Include="Classes\Boot.ts" />
+    <TypeScriptCompile Include="Classes\Game.ts" />
+    <TypeScriptCompile Include="Classes\MainMenu.ts" />
     <TypeScriptCompile Include="Classes\Player.ts" />
+    <TypeScriptCompile Include="Classes\Preloader.ts" />
     <TypeScriptCompile Include="p2.d.ts" />
     <TypeScriptCompile Include="phaser.comments.d.ts" />
     <TypeScriptCompile Include="phaser.d.ts" />
     <TypeScriptCompile Include="phaser_box2d.d.ts" />
     <TypeScriptCompile Include="pixi.comments.d.ts" />
     <TypeScriptCompile Include="pixi.d.ts" />
-    <TypeScriptCompile Include="Tutorial1.ts" />
+    <TypeScriptCompile Include="Classes\Tutorial1.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
