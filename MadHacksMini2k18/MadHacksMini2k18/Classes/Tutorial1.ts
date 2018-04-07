@@ -13,12 +13,14 @@
             'x p                x',
             'xxxxxxxxxxxxxxxxxxxx'
         ]
+        tiles = [];
 
         loadLevel() {
             for (let i = 0; i < this.level.length; i++) {
                 for (let j = 0; j < this.level[i].length; j++) {
                     if (this.level[i][j] === 'x') {
-                        this.game.add.sprite(j * 32, i * 32, 'Tile');
+                        let tile = new Tile(this.game, j * 32, i * 32);
+                        this.tiles.push(tile);
                     }
 
                     if (this.level[i][j] === 'p') {
@@ -33,8 +35,10 @@
 			
 		}
 
-		update() {
-
+        update() {
+            for (let i = 0; i < this.tiles.length; i++) {
+                this.game.physics.arcade.collide(this.player, this.tiles[i], this.player.collisionHandler, null, this);
+            }
 		}
 
 		// Properties
