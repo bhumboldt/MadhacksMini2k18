@@ -12,15 +12,68 @@ var MadHacks;
 (function (MadHacks) {
     var Ghost = (function (_super) {
         __extends(Ghost, _super);
-        function Ghost(game, x, y) {
+        function Ghost(game, x, y, actions) {
             var _this = _super.call(this, game, x, y, 'Player', 0) || this;
             _this.game.physics.arcade.enableBody(_this);
             _this.anchor.setTo(0.5, 0);
             game.add.existing(_this);
             _this.isTouchingGround = true;
+            _this.actions = actions;
+            var curAction = actions.shift();
+            _this.action = curAction.actions;
+            _this.frames = curAction.frames;
+            console.log("ACTIONS PASSED IN: \n");
+            for (var i = 0; i < actions.length; i++) {
+                console.log(actions[i].actions + " " + actions[i].frames);
+            }
             return _this;
         }
         Ghost.prototype.preload = function () {
+        };
+        Ghost.prototype.update = function () {
+            if (this.isDead) {
+                this.destroy();
+            }
+            console.log("Ghost action: " + this.action);
+            if (!this.freeze) {
+                if (this.action = "LEFT") {
+                    this.body.velocity.x = -150;
+                }
+                else if (this.action = "RIGHT") {
+                    this.body.velocity.x = 150;
+                }
+                else {
+                    this.body.velocity.x = 0;
+                }
+                // Jumping
+                //if (this.action = "JUMP") {
+                //    if (this.isTouchingGround) {
+                //        this.body.velocity.y = -250;
+                //        this.isTouchingGround = false;
+                //    }
+                //}
+                this.frames--;
+                if (this.frames == 0) {
+                    if (this.actions.length > 0) {
+                        var curAction = this.actions.shift();
+                        this.action = curAction.actions;
+                        this.frames = curAction.frames;
+                    }
+                    else {
+                        this.freeze = true;
+                    }
+                }
+            }
+        };
+        Ghost.prototype.collisionHandler = function (obj1, obj2) {
+            obj1.body.velocity.y = 0;
+            obj1.isTouchingGround = true;
+        };
+        Ghost.prototype.trapCollisionHandler = function (obj1, obj2) {
+            obj1.isDead = true;
+            for (var i = 0; i < obj1.actions.length; i++) {
+                //console.log(obj1.actions[i].actions + " " + obj1.actions[i].frames);
+            }
         };
         return Ghost;
     }(Phaser.Sprite));

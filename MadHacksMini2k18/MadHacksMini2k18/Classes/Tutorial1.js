@@ -28,6 +28,9 @@ var MadHacks;
             ];
             _this.tiles = [];
             _this.traps = [];
+            _this.ghosts = [];
+            _this.timer = 1000;
+            _this.canPress = true;
             return _this;
         }
         Tutorial1.prototype.loadLevel = function () {
@@ -54,17 +57,40 @@ var MadHacks;
         Tutorial1.prototype.preload = function () {
         };
         Tutorial1.prototype.update = function () {
+            if (!this.canPress) {
+                this.timer--;
+            }
+            if (this.timer == 0) {
+                this.canPress = true;
+                this.timer = 100;
+            }
             for (var i = 0; i < this.tiles.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.tiles[i], this.player.collisionHandler, null, this);
+                for (var j = 0; j < this.ghosts.length; j++) {
+                    this.game.physics.arcade.collide(this.ghosts[j], this.tiles[i], this.ghosts[j].collisionHandler, null, this);
+                }
             }
             for (var i = 0; i < this.traps.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.traps[i], this.player.trapCollisionHandler, null, this);
+                for (var j = 0; j < this.ghosts.length; j++) {
+                    this.game.physics.arcade.collide(this.ghosts[j], this.traps[i], this.ghosts[j].trapCollisionHandler, null, this);
+                }
+            }
+            if (this.canPress && this.game.input.keyboard.isDown(Phaser.Keyboard.Z)) {
+                this.canPress = false;
+                this.player.actions.push(new MadHacks.PlayerActions(this.player.oldAction, this.player.frames));
+                this.player.frames = 0;
+                this.addGhost();
             }
         };
         // Create
         Tutorial1.prototype.create = function () {
             this.background = this.add.sprite(0, 0, 'Background');
             this.loadLevel();
+        };
+        // Adds a ghost to the level
+        Tutorial1.prototype.addGhost = function () {
+            this.ghosts.push(new MadHacks.Ghost(this.game, 100, 100, this.player.actions));
         };
         return Tutorial1;
     }(Phaser.State));

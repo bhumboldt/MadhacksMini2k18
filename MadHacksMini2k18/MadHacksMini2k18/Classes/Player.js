@@ -15,65 +15,53 @@ var MadHacks;
         function Player(game, x, y) {
             var _this = _super.call(this, game, x, y, 'Player', 0) || this;
             _this.isDead = true;
+            _this.isGhost = false;
             _this.game.physics.arcade.enableBody(_this);
             _this.anchor.setTo(0.5, 0);
             game.add.existing(_this);
             _this.isTouchingGround = true;
-<<<<<<< HEAD
             _this.pWait = true;
-            _this.frames = 0;
-            _this.currentAction = "WAIT";
-=======
             _this.isDead = false;
->>>>>>> dafd9250b25fdf0cfe308f517e325ef695f904a7
+            _this.frames = 0;
+            _this.oldAction = "WAIT";
+            _this.currentAction = "WAIT";
+            _this.actions = new Array();
             return _this;
         }
         Player.prototype.preload = function () {
         };
         Player.prototype.update = function () {
-<<<<<<< HEAD
+            //console.log(this.currentAction);
+            if (this.isDead) {
+                this.game.state.restart(true, false);
+            }
+            // Get current action
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
+                this.currentAction = "LEFT";
+            else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT))
+                this.currentAction = "RIGHT";
+            else
+                this.currentAction = "WAIT";
             // If player was and is waiting
-            if (this.pWait && this.currentAction === "WAIT") {
-                this.frames++;
-            }
-            else if (this.pRight && this.currentAction === "RIGHT") {
-                this.frames++;
-            }
-            else if (this.pLeft && this.currentAction === "LEFT") {
+            if (this.oldAction === this.currentAction) {
                 this.frames++;
             }
             else {
-                this.actions.push(new MadHacks.PlayerActions(this.currentAction, this.frames));
+                //console.log("Added action");
+                this.actions.push(new MadHacks.PlayerActions(this.oldAction, this.frames));
                 this.frames = 0;
-            }
-            // Add jump to the action list
-            if (this.pJump) {
-                this.actions.push(new MadHacks.PlayerActions("JUMP", this.frames));
-=======
-            if (this.isDead) {
-                this.game.state.restart(true, false);
->>>>>>> dafd9250b25fdf0cfe308f517e325ef695f904a7
             }
             // Movement for the player
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
-                this.pLeft = true;
-                this.pRight = false;
-                this.pWait = false;
-                this.currentAction = "LEFT";
+                this.oldAction = "LEFT";
                 this.body.velocity.x = -150;
             }
             else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-                this.pLeft = false;
-                this.pRight = true;
-                this.pWait = false;
-                this.currentAction = "RIGHT";
+                this.oldAction = "RIGHT";
                 this.body.velocity.x = 150;
             }
             else {
-                this.pLeft = false;
-                this.pRight = false;
-                this.pWait = true;
-                this.currentAction = "WAIT";
+                this.oldAction = "WAIT";
                 this.body.velocity.x = 0;
             }
             // Jumping
@@ -81,11 +69,15 @@ var MadHacks;
                 if (this.isTouchingGround) {
                     this.body.velocity.y = -250;
                     this.isTouchingGround = false;
+                    this.actions.push(new MadHacks.PlayerActions(this.oldAction, this.frames));
+                    this.actions.push(new MadHacks.PlayerActions("JUMP", this.frames));
+                    this.frames = 0;
                 }
             }
             // Logic to add to player actions
         };
         Player.prototype.create = function () {
+            // this.game.input.onDown.addOnce()
         };
         Player.prototype.collisionHandler = function (obj1, obj2) {
             obj1.body.velocity.y = 0;
@@ -93,6 +85,9 @@ var MadHacks;
         };
         Player.prototype.trapCollisionHandler = function (obj1, obj2) {
             obj1.isDead = true;
+            for (var i = 0; i < obj1.actions.length; i++) {
+                console.log(obj1.actions[i].actions + " " + obj1.actions[i].frames);
+            }
         };
         return Player;
     }(Phaser.Sprite));
