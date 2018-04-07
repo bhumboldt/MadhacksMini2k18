@@ -86,23 +86,19 @@ var MadHacks;
                 this.canPress = true;
                 this.timer = 25;
             }
+            // Tile interactions
             for (var i = 0; i < this.tiles.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.tiles[i], this.player.collisionHandler, null, this);
                 for (var j = 0; j < this.ghosts.length; j++) {
                     this.game.physics.arcade.collide(this.ghosts[j], this.tiles[i], this.ghosts[j].collisionHandler, null, this);
                 }
             }
+            // Trap interaction
             for (var i = 0; i < this.traps.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.traps[i], this.trapCollisionHandler, null, this);
                 for (var j = 0; j < this.ghosts.length; j++) {
                     this.game.physics.arcade.collide(this.ghosts[j], this.traps[i], this.ghosts[j].trapCollisionHandler, null, this);
                 }
-            }
-            if (this.canPress && this.game.input.keyboard.isDown(Phaser.Keyboard.Z)) {
-                this.canPress = false;
-                this.player.actions.push(new MadHacks.PlayerActions(this.player.oldAction, this.player.frames));
-                this.player.frames = 0;
-                this.addGhost();
             }
             for (var i = 0; i < this.collectibles.length; i++) {
                 this.game.physics.arcade.overlap(this.player, this.collectibles[i], this.collectibleCollisionHandler, null, this);
@@ -111,12 +107,24 @@ var MadHacks;
             }
             for (var i = 0; i < this.ghosts.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.ghosts[i], this.ghostCollisionHandler, null, this);
+                for (var j = 0; j < this.ghosts.length; j++) {
+                    if (j !== i) {
+                        this.game.physics.arcade.collide(this.ghosts[i], this.ghosts[j], this.ghostghostCollisionHandler, null, this);
+                    }
+                }
             }
             for (var i = 0; i < this.walls.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.walls[i], this.wallCollisionHandler, null, this);
                 for (var j = 0; j < this.ghosts.length; j++) {
                     this.game.physics.arcade.collide(this.ghosts[j], this.walls[i], this.wallGhostCollisionHandler, null, this);
                 }
+            }
+            // Spawn a new ghost
+            if (this.canPress && this.game.input.keyboard.isDown(Phaser.Keyboard.Z)) {
+                this.canPress = false;
+                this.player.actions.push(new MadHacks.PlayerActions(this.player.oldAction, this.player.frames));
+                this.player.frames = 0;
+                this.addGhost();
             }
         };
         Tutorial1.prototype.wallGhostCollisionHandler = function (obj1, obj2) {
@@ -130,6 +138,13 @@ var MadHacks;
         };
         Tutorial1.prototype.ghostCollisionHandler = function (obj1, obj2) {
             obj1.canJump = true;
+            obj2.canJump = true;
+            obj2.body.velocity.x = 0;
+        };
+        Tutorial1.prototype.ghostghostCollisionHandler = function (obj1, obj2) {
+            obj1.canJump = true;
+            obj2.canJump = true;
+            obj1.body.velocity.x = 0;
             obj2.body.velocity.x = 0;
         };
         Tutorial1.prototype.trapCollisionHandler = function (obj1, obj2) {

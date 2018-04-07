@@ -86,6 +86,7 @@
                 this.timer = 25;
             }
 
+            // Tile interactions
             for (let i = 0; i < this.tiles.length; i++) {
 
                 this.game.physics.arcade.collide(this.player, this.tiles[i], this.player.collisionHandler, null, this);
@@ -94,6 +95,7 @@
                 }
             }
 
+            // Trap interaction
             for (let i = 0; i < this.traps.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.traps[i], this.trapCollisionHandler, null, this);
                 for (let j = 0; j < this.ghosts.length; j++) {
@@ -101,12 +103,6 @@
                 }
             }
 
-            if (this.canPress && this.game.input.keyboard.isDown(Phaser.Keyboard.Z)) {
-                this.canPress = false;
-                this.player.actions.push(new PlayerActions(this.player.oldAction, this.player.frames));
-                this.player.frames = 0;
-                this.addGhost();
-            }
 
             for (let i = 0; i < this.collectibles.length; i++) {
                 this.game.physics.arcade.overlap(this.player, this.collectibles[i], this.collectibleCollisionHandler, null, this);
@@ -118,6 +114,11 @@
 
             for (let i = 0; i < this.ghosts.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.ghosts[i], this.ghostCollisionHandler, null, this);
+                for (let j = 0; j < this.ghosts.length; j++) {
+                    if (j !== i) {
+                        this.game.physics.arcade.collide(this.ghosts[i], this.ghosts[j], this.ghostghostCollisionHandler, null, this);
+                    }
+                }
             }
 
             for (let i = 0; i < this.walls.length; i++) {
@@ -125,6 +126,14 @@
                 for (let j = 0; j < this.ghosts.length; j++) {
                     this.game.physics.arcade.collide(this.ghosts[j], this.walls[i], this.wallGhostCollisionHandler, null, this);
                 }
+            }
+
+            // Spawn a new ghost
+            if (this.canPress && this.game.input.keyboard.isDown(Phaser.Keyboard.Z)) {
+                this.canPress = false;
+                this.player.actions.push(new PlayerActions(this.player.oldAction, this.player.frames));
+                this.player.frames = 0;
+                this.addGhost();
             }
         }
 
@@ -144,6 +153,15 @@
 
         ghostCollisionHandler(obj1: Player, obj2: Ghost) {
             obj1.canJump = true;
+            obj2.canJump = true;
+            obj2.body.velocity.x = 0;
+            
+        }
+
+        ghostghostCollisionHandler(obj1: Ghost, obj2: Ghost) {
+            obj1.canJump = true;
+            obj2.canJump = true;
+            obj1.body.velocity.x = 0;
             obj2.body.velocity.x = 0;
         }
 

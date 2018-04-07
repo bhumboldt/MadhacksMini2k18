@@ -38,14 +38,6 @@ var MadHacks;
             if (this.isDead) {
                 this.game.state.restart(true, false);
             }
-            //if (this.body.velocity.y === 0) {
-            //    if (this.jumpTimer === 0) {
-            //        this.canJump = true;
-            //    } else {
-            //        this.jumpTimer = 0;
-            //        console.log("reduce timer");
-            //    }
-            //}
             // Get current action
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
                 this.currentAction = "LEFT";
@@ -77,13 +69,11 @@ var MadHacks;
             }
             // Jumping
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-                console.log("is jumping " + this.body.velocity.y);
                 if (this.canJump) {
-                    console.log("jumping");
                     this.body.velocity.y = -250;
-                    this.jumpTimer = 1;
                     this.canJump = false;
                     this.actions.push(new MadHacks.PlayerActions(this.oldAction, this.frames));
+                    // Pull out of if statement
                     this.actions.push(new MadHacks.PlayerActions("JUMP", this.frames));
                     this.frames = 0;
                 }
