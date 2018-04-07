@@ -10,20 +10,20 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Tutorial1 = (function (_super) {
+    var Tutorial1 = /** @class */ (function (_super) {
         __extends(Tutorial1, _super);
         function Tutorial1() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
             _this.level = [
                 'xxxxxxxxxxxxxxxxxxxx',
-                'x                  x',
-                'x                  x',
-                'x                  x',
-                'x                  x',
-                'x        c         x',
-                'x                  x',
-                'x                  x',
-                'x p       t        x',
+                'w                  w',
+                'w                  w',
+                'w                  w',
+                'w                  w',
+                'w        c         w',
+                'w         w        w',
+                'w s       w        w',
+                'w p       w        w',
                 'xxxxxxxxxxxxxxxxxxex'
             ];
             _this.tiles = [];
@@ -34,6 +34,9 @@ var MadHacks;
             _this.collectibles = [];
             _this.score = 0;
             _this.ghostTexts = [];
+            _this.walls = [];
+            _this.ghostSpawnX = 0;
+            _this.ghostSpawnY = 0;
             return _this;
         }
         Tutorial1.prototype.loadLevel = function () {
@@ -47,6 +50,10 @@ var MadHacks;
                         this.player = new MadHacks.Player(this.game, j * 32, i * 32);
                         this.player.body.collideWorldBounds = true;
                     }
+                    if (this.level[i][j] === 's') {
+                        this.ghostSpawnX = j * 32;
+                        this.ghostSpawnY = i * 32;
+                    }
                     if (this.level[i][j] === 'e') {
                         this.exit = new MadHacks.Exit(this.game, j * 32, i * 32);
                     }
@@ -57,6 +64,10 @@ var MadHacks;
                     if (this.level[i][j] === 'c') {
                         var collectible = new MadHacks.Collectible(this.game, j * 32, i * 32);
                         this.collectibles.push(collectible);
+                    }
+                    if (this.level[i][j] === 'w') {
+                        var wall = new MadHacks.Wall(this.game, j * 32, i * 32);
+                        this.walls.push(wall);
                     }
                 }
             }
@@ -101,6 +112,16 @@ var MadHacks;
             for (var i = 0; i < this.ghosts.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.ghosts[i], this.ghostCollisionHandler, null, this);
             }
+            for (var i = 0; i < this.walls.length; i++) {
+                this.game.physics.arcade.collide(this.player, this.walls[i], this.wallCollisionHandler, null, this);
+                for (var j = 0; j < this.ghosts.length; j++) {
+                    this.game.physics.arcade.collide(this.ghosts[j], this.walls[i], this.wallGhostCollisionHandler, null, this);
+                }
+            }
+        };
+        Tutorial1.prototype.wallGhostCollisionHandler = function (obj1, obj2) {
+        };
+        Tutorial1.prototype.wallCollisionHandler = function (obj1, obj2) {
         };
         Tutorial1.prototype.collectibleCollisionHandler = function (obj1, obj2) {
             obj2.destroy(true);
@@ -108,6 +129,7 @@ var MadHacks;
             this.scoreText.text = 'Score: ' + this.score;
         };
         Tutorial1.prototype.ghostCollisionHandler = function (obj1, obj2) {
+            obj1.canJump = true;
             obj2.body.velocity.x = 0;
         };
         Tutorial1.prototype.trapCollisionHandler = function (obj1, obj2) {
@@ -125,20 +147,21 @@ var MadHacks;
             this.scoreText = this.game.add.text(10, 10, 'Score: ' + this.score, {
                 font: '15px Arial'
             });
+            this.game.add.text(100, 100, 'Press \'z\' to spawn a ghost that will mirror your past actions.\nThis can be used to get over obstacles.', {
+                font: '15px Arial'
+            });
         };
         Tutorial1.prototype.restart = function () {
             this.score = 0;
         };
         // Adds a ghost to the level
         Tutorial1.prototype.addGhost = function () {
-            var ghost = new MadHacks.Ghost(this.game, this.player.originalX, this.player.originalY, this.player.actions);
+            var ghost = new MadHacks.Ghost(this.game, this.ghostSpawnX, this.ghostSpawnY, this.player.actions);
             this.ghosts.push(ghost);
             var ghostText = this.game.add.text(Math.floor(ghost.x + ghost.width / 2), Math.floor(ghost.y + ghost.height / 2), '' + this.ghosts.length);
             ghostText.anchor.set(0.5);
             this.ghostTexts.push(ghostText);
             this.player.actions = this.player.actions.splice(0, this.player.actions.length);
-            this.player.originalY = this.player.y;
-            this.player.originalX = this.player.x;
         };
         return Tutorial1;
     }(Phaser.State));

@@ -8,9 +8,9 @@
             'w                  w',
             'w                  w',
             'w        c         w',
-            'w                  w',
-            'w                  w',
-            'w p       t        w',
+            'w         w        w',
+            'w s       w        w',
+            'w p       w        w',
             'xxxxxxxxxxxxxxxxxxex'
         ]
         tiles = [];
@@ -24,6 +24,8 @@
         scoreText: Phaser.Text;
         ghostTexts = [];
         walls = [];
+        ghostSpawnX = 0;
+        ghostSpawnY = 0;
 
         loadLevel() {
             for (let i = 0; i < this.level.length; i++) {
@@ -36,6 +38,11 @@
                     if (this.level[i][j] === 'p') {
                         this.player = new Player(this.game, j * 32, i * 32);
                         this.player.body.collideWorldBounds = true;
+                    }
+
+                    if (this.level[i][j] === 's') {
+                        this.ghostSpawnX = j * 32;
+                        this.ghostSpawnY = i * 32;
                     }
 
                     if (this.level[i][j] === 'e') {
@@ -162,6 +169,10 @@
             this.scoreText = this.game.add.text(10, 10, 'Score: ' + this.score, {
                 font: '15px Arial'
             });
+
+            this.game.add.text(100, 100, 'Press \'z\' to spawn a ghost that will mirror your past actions.\nThis can be used to get over obstacles.', {
+                font: '15px Arial'
+            });
         }
 
         restart() {
@@ -170,14 +181,12 @@
 
         // Adds a ghost to the level
         addGhost() {
-            let ghost = new Ghost(this.game, this.player.originalX, this.player.originalY, this.player.actions);
+            let ghost = new Ghost(this.game, this.ghostSpawnX, this.ghostSpawnY, this.player.actions);
             this.ghosts.push(ghost);
             let ghostText = this.game.add.text(Math.floor(ghost.x + ghost.width / 2), Math.floor(ghost.y + ghost.height / 2), '' + this.ghosts.length);
             ghostText.anchor.set(0.5);
             this.ghostTexts.push(ghostText);
             this.player.actions = this.player.actions.splice(0, this.player.actions.length);
-            this.player.originalY = this.player.y;
-            this.player.originalX = this.player.x;
         }
 	}
 }

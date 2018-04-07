@@ -34,8 +34,6 @@
             this.oldAction = "WAIT";
             this.currentAction = "WAIT";
             this.actions = new Array<PlayerActions>();
-            this.originalX = this.x;
-            this.originalY = this.y;
         }
 
         update() {

@@ -63,6 +63,8 @@
                         this.freeze = true;
                     }
                 }
+            } else {
+                this.body.velocity.x = 0;
             }
         }
 

@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Player = (function (_super) {
+    var Player = /** @class */ (function (_super) {
         __extends(Player, _super);
         function Player(game, x, y) {
             var _this = _super.call(this, game, x, y, 'Player', 0) || this;
@@ -21,7 +21,7 @@ var MadHacks;
             _this.game.physics.arcade.enableBody(_this);
             _this.anchor.setTo(0.5, 0);
             game.add.existing(_this);
-            _this.canJump = false;
+            _this.canJump = true;
             _this.jumpTimer = 0;
             _this.pWait = true;
             _this.isDead = false;
@@ -29,8 +29,6 @@ var MadHacks;
             _this.oldAction = "WAIT";
             _this.currentAction = "WAIT";
             _this.actions = new Array();
-            _this.originalX = _this.x;
-            _this.originalY = _this.y;
             return _this;
         }
         Player.prototype.preload = function () {
@@ -40,15 +38,14 @@ var MadHacks;
             if (this.isDead) {
                 this.game.state.restart(true, false);
             }
-            if (this.body.velocity.y < 1 && this.body.velocity.y > -1) {
-                if (this.jumpTimer === 0) {
-                    this.canJump = true;
-                }
-                else {
-                    this.jumpTimer = 0;
-                    console.log("reduce timer");
-                }
-            }
+            //if (this.body.velocity.y === 0) {
+            //    if (this.jumpTimer === 0) {
+            //        this.canJump = true;
+            //    } else {
+            //        this.jumpTimer = 0;
+            //        console.log("reduce timer");
+            //    }
+            //}
             // Get current action
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
                 this.currentAction = "LEFT";
@@ -91,14 +88,13 @@ var MadHacks;
                     this.frames = 0;
                 }
             }
-            // Logic to add to player actions
         };
         Player.prototype.create = function () {
             // this.game.input.onDown.addOnce()
         };
         Player.prototype.collisionHandler = function (obj1, obj2) {
             obj1.body.velocity.y = 0;
-            //obj1.isTouchingGround = true;
+            obj1.canJump = true;
         };
         Player.prototype.trapCollisionHandler = function (obj1, obj2) {
             for (var i = 0; i < obj1.actions.length; i++) {
