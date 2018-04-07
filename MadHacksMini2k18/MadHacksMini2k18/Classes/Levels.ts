@@ -1,9 +1,10 @@
 ﻿module MadHacks {
 
     export class Levels {
+        public currentLevel = 0;
 
         // level array is two-dimensional string array
-        levelArray = [[
+        public levelArray = [[
             // Level 1
             'xxxxxxxxxxxxxxxxxxxx',
             'w                  w',
@@ -18,7 +19,7 @@
             ],
 
         [   // Level 2
-            'xxxxxxxxxxxxxxxexxxx',
+            'xxxxxxxxxxxxxxxxxxxx',
             'x                  x',
             'x                  x',
             'x t                x',
@@ -26,7 +27,7 @@
             'x        c         x',
             'x             c   xx',
             'x   c              x',
-            'x p          t     x',
+            'x p          t     e',
             'xxxxxxxxxxxxxxxxxtxx'
             ],
 
@@ -44,6 +45,9 @@
             ]
         
         ];
+        constructor() {
+
+        }
     }
 
 }

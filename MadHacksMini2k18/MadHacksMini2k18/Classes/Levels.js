@@ -1,7 +1,8 @@
 var MadHacks;
 (function (MadHacks) {
-    var Levels = (function () {
+    var Levels = /** @class */ (function () {
         function Levels() {
+            this.currentLevel = 0;
             // level array is two-dimensional string array
             this.levelArray = [[
                     // Level 1
@@ -17,7 +18,7 @@ var MadHacks;
                     'xxxxxxxxxxxxxxxxxxex'
                 ],
                 [
-                    'xxxxxxxxxxxxxxxexxxx',
+                    'xxxxxxxxxxxxxxxxxxxx',
                     'x                  x',
                     'x                  x',
                     'x t                x',
@@ -25,7 +26,7 @@ var MadHacks;
                     'x        c         x',
                     'x             c   xx',
                     'x   c              x',
-                    'x p          t     x',
+                    'x p          t     e',
                     'xxxxxxxxxxxxxxxxxtxx'
                 ],
                 [

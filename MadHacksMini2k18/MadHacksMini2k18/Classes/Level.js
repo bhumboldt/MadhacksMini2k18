@@ -37,6 +37,7 @@ var MadHacks;
             _this.walls = [];
             _this.ghostSpawnX = 0;
             _this.ghostSpawnY = 0;
+            _this.levelManager = new MadHacks.Levels();
             return _this;
         }
         Level.prototype.loadLevel = function () {
@@ -75,6 +76,9 @@ var MadHacks;
         Level.prototype.preload = function () {
         };
         Level.prototype.update = function () {
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.R)) {
+                this.game.state.restart();
+            }
             for (var i = 0; i < this.ghostTexts.length; i++) {
                 this.ghostTexts[i].x = Math.floor(this.ghosts[i].x + this.ghosts[i].width / 2);
                 this.ghostTexts[i].y = Math.floor(this.ghosts[i].y + this.ghosts[i].height / 2);
@@ -153,20 +157,48 @@ var MadHacks;
             this.scoreText.text = 'Score: ' + this.score;
         };
         Level.prototype.exitCollisionHandler = function (obj1, obj2) {
+            this.player.destroy();
+            for (var i = 0; i < this.ghosts.length; i++) {
+                this.ghosts[i].destroy();
+            }
+            for (var i = 0; i < this.ghostTexts.length; i++) {
+                this.ghostTexts[i].destroy();
+            }
+            for (var i = 0; i < this.walls.length; i++) {
+                this.walls[i].destroy();
+            }
+            for (var i = 0; i < this.tiles.length; i++) {
+                this.tiles[i].destroy();
+            }
+            for (var i = 0; i < this.collectibles.length; i++) {
+                this.collectibles[i].destroy();
+            }
+            for (var i = 0; i < this.traps.length; i++) {
+                this.traps[i].destroy();
+            }
+            this.exit.destroy();
+            if (this.tutorialText !== null) {
+                this.tutorialText.destroy();
+            }
+            this.level = this.levelManager.levelArray[++this.levelManager.currentLevel];
+            this.loadLevel();
+            this.renderScore();
         };
         // Create
         Level.prototype.create = function () {
             this.background = this.add.sprite(0, 0, 'Background');
             this.loadLevel();
+            this.renderScore();
+            if (this.levelManager.currentLevel === 0) {
+                this.tutorialText = this.game.add.text(100, 100, 'Press \'z\' to spawn a ghost that will mirror your past actions.\nThis can be used to get over obstacles.', {
+                    font: '15px Arial'
+                });
+            }
+        };
+        Level.prototype.renderScore = function () {
             this.scoreText = this.game.add.text(10, 10, 'Score: ' + this.score, {
                 font: '15px Arial'
             });
-            this.game.add.text(100, 100, 'Press \'z\' to spawn a ghost that will mirror your past actions.\nThis can be used to get over obstacles.', {
-                font: '15px Arial'
-            });
-        };
-        Level.prototype.restart = function () {
-            this.score = 0;
         };
         // Adds a ghost to the level
         Level.prototype.addGhost = function () {
