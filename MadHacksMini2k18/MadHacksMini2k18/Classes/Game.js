@@ -17,8 +17,7 @@ var MadHacks;
             _this.state.add('Boot', MadHacks.Boot, false);
             _this.state.add('Preloader', MadHacks.Preloader, false);
             _this.state.add('MainMenu', MadHacks.MainMenu, false);
-            _this.state.add('Tutorial1', MadHacks.Tutorial1, false);
-            _this.state.add('Tutorial2', MadHacks.Tutorial2, false);
+            _this.state.add('Level', MadHacks.Level, false);
             _this.state.start('Boot');
             return _this;
         }

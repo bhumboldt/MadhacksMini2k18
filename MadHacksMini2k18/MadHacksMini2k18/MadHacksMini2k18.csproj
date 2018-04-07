@@ -95,7 +95,6 @@
     <TypeScriptCompile Include="Classes\Player.ts" />
     <TypeScriptCompile Include="Classes\Preloader.ts" />
     <TypeScriptCompile Include="Classes\Trap.ts" />
-    <TypeScriptCompile Include="Classes\Tutorial2.ts" />
     <TypeScriptCompile Include="Classes\Wall.ts" />
     <TypeScriptCompile Include="p2.d.ts" />
     <TypeScriptCompile Include="phaser.comments.d.ts" />
@@ -103,7 +102,7 @@
     <TypeScriptCompile Include="phaser_box2d.d.ts" />
     <TypeScriptCompile Include="pixi.comments.d.ts" />
     <TypeScriptCompile Include="pixi.d.ts" />
-    <TypeScriptCompile Include="Classes\Tutorial1.ts" />
+    <TypeScriptCompile Include="Classes\Level.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

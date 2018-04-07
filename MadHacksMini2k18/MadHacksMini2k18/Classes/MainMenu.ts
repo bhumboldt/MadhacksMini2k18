@@ -11,7 +11,7 @@
         }
 
         startGame() {
-            this.game.state.start('Tutorial1', true, false);
+            this.game.state.start('Level', true, false);
         }
     }
 }
