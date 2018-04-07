@@ -61,6 +61,7 @@
     <Content Include="Assets\MainMenuBackground.png" />
     <Content Include="Assets\Player.png" />
     <Content Include="Assets\Tile.png" />
+    <Content Include="Assets\Trap.png" />
     <Content Include="phaser2.png" />
     <Content Include="phaser.js" />
     <Content Include="README.md" />
@@ -88,6 +89,7 @@
     <TypeScriptCompile Include="Classes\MainMenu.ts" />
     <TypeScriptCompile Include="Classes\Player.ts" />
     <TypeScriptCompile Include="Classes\Preloader.ts" />
+    <TypeScriptCompile Include="Classes\Trap.ts" />
     <TypeScriptCompile Include="p2.d.ts" />
     <TypeScriptCompile Include="phaser.comments.d.ts" />
     <TypeScriptCompile Include="phaser.d.ts" />

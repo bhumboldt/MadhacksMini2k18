@@ -23,10 +23,11 @@ var MadHacks;
                 'x                  x',
                 'x                  x',
                 'x                  x',
-                'x p                x',
+                'x p       t        x',
                 'xxxxxxxxxxxxxxxxxxex'
             ];
             _this.tiles = [];
+            _this.traps = [];
             return _this;
         }
         Tutorial1.prototype.loadLevel = function () {
@@ -43,6 +44,10 @@ var MadHacks;
                     if (this.level[i][j] === 'e') {
                         this.exit = new MadHacks.Exit(this.game, j * 32, i * 32);
                     }
+                    if (this.level[i][j] === 't') {
+                        var trap = new MadHacks.Trap(this.game, j * 32, i * 32);
+                        this.traps.push(trap);
+                    }
                 }
             }
         };
@@ -51,6 +56,9 @@ var MadHacks;
         Tutorial1.prototype.update = function () {
             for (var i = 0; i < this.tiles.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.tiles[i], this.player.collisionHandler, null, this);
+            }
+            for (var i = 0; i < this.traps.length; i++) {
+                this.game.physics.arcade.collide(this.player, this.traps[i], this.player.trapCollisionHandler, null, this);
             }
         };
         // Create

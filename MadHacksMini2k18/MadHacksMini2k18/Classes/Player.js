@@ -14,15 +14,20 @@ var MadHacks;
         __extends(Player, _super);
         function Player(game, x, y) {
             var _this = _super.call(this, game, x, y, 'Player', 0) || this;
+            _this.isDead = true;
             _this.game.physics.arcade.enableBody(_this);
             _this.anchor.setTo(0.5, 0);
             game.add.existing(_this);
             _this.isTouchingGround = true;
+            _this.isDead = false;
             return _this;
         }
         Player.prototype.preload = function () {
         };
         Player.prototype.update = function () {
+            if (this.isDead) {
+                this.game.state.restart(true, false);
+            }
             // Movement for the player
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
                 this.body.velocity.x = -150;
@@ -46,6 +51,9 @@ var MadHacks;
         Player.prototype.collisionHandler = function (obj1, obj2) {
             obj1.body.velocity.y = 0;
             obj1.isTouchingGround = true;
+        };
+        Player.prototype.trapCollisionHandler = function (obj1, obj2) {
+            obj1.isDead = true;
         };
         return Player;
     }(Phaser.Sprite));

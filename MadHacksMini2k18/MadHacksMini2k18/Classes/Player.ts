@@ -2,7 +2,8 @@
 
 	export class Player extends Phaser.Sprite{
 		sprite: string;
-		isTouchingGround: boolean;
+        isTouchingGround: boolean;
+        isDead = true;
 
 		preload() {
 
@@ -15,8 +16,12 @@
 			this.anchor.setTo(0.5, 0);
             game.add.existing(this);
             this.isTouchingGround = true;
+            this.isDead = false;
 		}
-		update() {
+        update() {
+            if (this.isDead) {
+                this.game.state.restart(true, false);
+            }
 
 			// Movement for the player
 			if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
@@ -49,6 +54,10 @@
             obj1.body.velocity.y = 0;
             obj1.isTouchingGround = true;
 
+        }
+
+        trapCollisionHandler(obj1: Player, obj2: Trap) {
+            obj1.isDead = true;
         }
 	}
 
