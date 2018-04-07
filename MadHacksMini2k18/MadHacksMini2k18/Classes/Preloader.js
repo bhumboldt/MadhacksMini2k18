@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Preloader = (function (_super) {
+    var Preloader = /** @class */ (function (_super) {
         __extends(Preloader, _super);
         function Preloader() {
             return _super !== null && _super.apply(this, arguments) || this;
@@ -20,6 +20,7 @@ var MadHacks;
             this.load.image('MainMenuBackground', 'Assets/MainMenuBackground.png');
             this.load.image('Background', 'Assets/LevelBackground.png');
             this.load.image('Player', 'Assets/Player.png');
+            this.load.image('Tile', 'Assets/Tile.png');
         };
         Preloader.prototype.create = function () {
             this.game.state.start('MainMenu');
