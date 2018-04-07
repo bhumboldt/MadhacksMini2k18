@@ -17,7 +17,7 @@
         exit: MadHacks.Exit;
         traps = [];
         ghosts = [];
-        timer = 1000;
+        timer = 25;
         canPress = true;
         collectibles = [];
         score = 0;
@@ -76,7 +76,7 @@
 
             if (this.timer == 0) {
                 this.canPress = true;
-                this.timer = 100;
+                this.timer = 25;
             }
 
             for (let i = 0; i < this.tiles.length; i++) {
@@ -137,6 +137,7 @@
 
         ghostCollisionHandler(obj1: Player, obj2: Ghost) {
             obj1.canJump = true;
+            obj2.body.velocity.x = 0;
         }
 
         trapCollisionHandler(obj1: Player, obj2: Trap) {

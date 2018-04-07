@@ -10,31 +10,30 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Tutorial1 = /** @class */ (function (_super) {
+    var Tutorial1 = (function (_super) {
         __extends(Tutorial1, _super);
         function Tutorial1() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
             _this.level = [
                 'xxxxxxxxxxxxxxxxxxxx',
-                'w                  w',
-                'w                  w',
-                'w                  w',
-                'w                  w',
-                'w        c         w',
-                'w                  w',
-                'w                  w',
-                'w p       t        w',
+                'x                  x',
+                'x                  x',
+                'x                  x',
+                'x                  x',
+                'x        c         x',
+                'x                  x',
+                'x                  x',
+                'x p       t        x',
                 'xxxxxxxxxxxxxxxxxxex'
             ];
             _this.tiles = [];
             _this.traps = [];
             _this.ghosts = [];
-            _this.timer = 1000;
+            _this.timer = 25;
             _this.canPress = true;
             _this.collectibles = [];
             _this.score = 0;
             _this.ghostTexts = [];
-            _this.walls = [];
             return _this;
         }
         Tutorial1.prototype.loadLevel = function () {
@@ -59,10 +58,6 @@ var MadHacks;
                         var collectible = new MadHacks.Collectible(this.game, j * 32, i * 32);
                         this.collectibles.push(collectible);
                     }
-                    if (this.level[i][j] === 'w') {
-                        var wall = new MadHacks.Wall(this.game, j * 32, i * 32);
-                        this.walls.push(wall);
-                    }
                 }
             }
         };
@@ -78,7 +73,7 @@ var MadHacks;
             }
             if (this.timer == 0) {
                 this.canPress = true;
-                this.timer = 100;
+                this.timer = 25;
             }
             for (var i = 0; i < this.tiles.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.tiles[i], this.player.collisionHandler, null, this);
@@ -106,16 +101,6 @@ var MadHacks;
             for (var i = 0; i < this.ghosts.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.ghosts[i], this.ghostCollisionHandler, null, this);
             }
-            for (var i = 0; i < this.walls.length; i++) {
-                this.game.physics.arcade.collide(this.player, this.walls[i], this.wallCollisionHandler, null, this);
-                for (var j = 0; j < this.ghosts.length; j++) {
-                    this.game.physics.arcade.collide(this.ghosts[j], this.walls[i], this.wallGhostCollisionHandler, null, this);
-                }
-            }
-        };
-        Tutorial1.prototype.wallGhostCollisionHandler = function (obj1, obj2) {
-        };
-        Tutorial1.prototype.wallCollisionHandler = function (obj1, obj2) {
         };
         Tutorial1.prototype.collectibleCollisionHandler = function (obj1, obj2) {
             obj2.destroy(true);
@@ -123,7 +108,7 @@ var MadHacks;
             this.scoreText.text = 'Score: ' + this.score;
         };
         Tutorial1.prototype.ghostCollisionHandler = function (obj1, obj2) {
-            obj1.canJump = true;
+            obj2.body.velocity.x = 0;
         };
         Tutorial1.prototype.trapCollisionHandler = function (obj1, obj2) {
             obj1.isDead = true;

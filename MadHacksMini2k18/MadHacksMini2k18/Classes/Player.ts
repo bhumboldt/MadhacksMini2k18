@@ -86,7 +86,7 @@
 
 			// Jumping
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-                console.log("is jumping");
+                console.log("is jumping " + this.body.velocity.y);
                 if (this.canJump) {
                     console.log("jumping");
                     this.body.velocity.y = -250;
