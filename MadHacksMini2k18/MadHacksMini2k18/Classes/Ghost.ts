@@ -16,26 +16,18 @@
 
             super(game, x, y, 'Player', 0);
             this.game.physics.arcade.enableBody(this);
-            //this.body.immovable = true;
             game.add.existing(this);
             this.isTouchingGround = true;
             this.actions = JSON.parse(JSON.stringify(actions));
-            console.log("ACTIONS PASSED IN: \n");
             for (let i = 0; i < actions.length; i++) {
                 console.log(actions[i].actions + " " + actions[i].frames);
             }
             let curAction = actions.shift();
             this.action = curAction.actions;
-            this.frames = curAction.frames;
-            console.log("CURRENT ACTOIN: " + this.action);
-            console.log("CURRENT FRAMES: " + this.frames);
-            
+            this.frames = curAction.frames;       
         }
 
         update() {
-
-            console.log("Ghost action: " + this.action);
-
             if (!this.freeze) {
                 if (this.action === "LEFT") {
                     this.body.velocity.x = -150;
@@ -67,8 +59,6 @@
                         let curAction = this.actions.shift();
                         this.action = curAction.actions;
                         this.frames = curAction.frames;
-                        console.log("CURRENT ACTOIN: " + this.action);
-                        console.log("CURRENT FRAMES: " + this.frames);
                     } else {
                         this.freeze = true;
                     }
@@ -85,7 +75,6 @@
             obj1.isDead = true;
             obj1.destroy();
             for (let i = 0; i < obj1.actions.length; i++) {
-                //console.log(obj1.actions[i].actions + " " + obj1.actions[i].frames);
             }
         }
     }

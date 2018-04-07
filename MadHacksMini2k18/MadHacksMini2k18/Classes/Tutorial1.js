@@ -29,7 +29,7 @@ var MadHacks;
             _this.tiles = [];
             _this.traps = [];
             _this.ghosts = [];
-            _this.timer = 1000;
+            _this.timer = 25;
             _this.canPress = true;
             _this.collectibles = [];
             _this.score = 0;
@@ -73,7 +73,7 @@ var MadHacks;
             }
             if (this.timer == 0) {
                 this.canPress = true;
-                this.timer = 100;
+                this.timer = 25;
             }
             for (var i = 0; i < this.tiles.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.tiles[i], this.player.collisionHandler, null, this);
@@ -108,6 +108,7 @@ var MadHacks;
             this.scoreText.text = 'Score: ' + this.score;
         };
         Tutorial1.prototype.ghostCollisionHandler = function (obj1, obj2) {
+            obj2.body.velocity.x = 0;
         };
         Tutorial1.prototype.trapCollisionHandler = function (obj1, obj2) {
             obj1.isDead = true;

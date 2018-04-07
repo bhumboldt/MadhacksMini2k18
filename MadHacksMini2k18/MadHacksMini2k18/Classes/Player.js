@@ -21,7 +21,8 @@ var MadHacks;
             _this.game.physics.arcade.enableBody(_this);
             _this.anchor.setTo(0.5, 0);
             game.add.existing(_this);
-            _this.isTouchingGround = true;
+            _this.canJump = false;
+            _this.jumpTimer = 0;
             _this.pWait = true;
             _this.isDead = false;
             _this.frames = 0;
@@ -38,6 +39,15 @@ var MadHacks;
             //console.log(this.currentAction);
             if (this.isDead) {
                 this.game.state.restart(true, false);
+            }
+            if (this.body.velocity.y < 1 && this.body.velocity.y > -1) {
+                if (this.jumpTimer === 0) {
+                    this.canJump = true;
+                }
+                else {
+                    this.jumpTimer = 0;
+                    console.log("reduce timer");
+                }
             }
             // Get current action
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
@@ -70,9 +80,12 @@ var MadHacks;
             }
             // Jumping
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-                if (this.isTouchingGround) {
+                console.log("is jumping " + this.body.velocity.y);
+                if (this.canJump) {
+                    console.log("jumping");
                     this.body.velocity.y = -250;
-                    this.isTouchingGround = false;
+                    this.jumpTimer = 1;
+                    this.canJump = false;
                     this.actions.push(new MadHacks.PlayerActions(this.oldAction, this.frames));
                     this.actions.push(new MadHacks.PlayerActions("JUMP", this.frames));
                     this.frames = 0;
@@ -85,7 +98,7 @@ var MadHacks;
         };
         Player.prototype.collisionHandler = function (obj1, obj2) {
             obj1.body.velocity.y = 0;
-            obj1.isTouchingGround = true;
+            //obj1.isTouchingGround = true;
         };
         Player.prototype.trapCollisionHandler = function (obj1, obj2) {
             for (var i = 0; i < obj1.actions.length; i++) {

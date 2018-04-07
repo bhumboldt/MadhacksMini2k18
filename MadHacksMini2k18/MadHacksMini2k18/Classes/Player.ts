@@ -43,7 +43,7 @@
             if (this.isDead) {
                 this.game.state.restart(true, false);
             }
-            if (this.body.velocity.y === 0) {
+            if (this.body.velocity.y < 1 && this.body.velocity.y > -1) {
                 if (this.jumpTimer === 0) {
                     this.canJump = true;
                 } else {
@@ -86,7 +86,7 @@
 
 			// Jumping
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-                console.log("is jumping");
+                console.log("is jumping " + this.body.velocity.y);
                 if (this.canJump) {
                     console.log("jumping");
                     this.body.velocity.y = -250;
@@ -109,7 +109,7 @@
 
         collisionHandler(obj1: Player, obj2) {
             obj1.body.velocity.y = 0;
-            obj1.isTouchingGround = true;
+            //obj1.isTouchingGround = true;
 
         }
 
