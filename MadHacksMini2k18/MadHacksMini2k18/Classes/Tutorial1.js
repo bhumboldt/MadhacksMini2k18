@@ -10,20 +10,18 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Tutorial1 = /** @class */ (function (_super) {
+    var Tutorial1 = (function (_super) {
         __extends(Tutorial1, _super);
         function Tutorial1() {
             return _super !== null && _super.apply(this, arguments) || this;
         }
         Tutorial1.prototype.preload = function () {
-            this.game.load.image('background', 'Assets/LevelBackground.png');
-            this.game.load.image('player', 'Assets/Player.png');
         };
         Tutorial1.prototype.update = function () {
         };
         // Create
         Tutorial1.prototype.create = function () {
-            this.background = this.add.sprite(0, 0, 'background');
+            this.background = this.add.sprite(0, 0, 'Background');
             // Place player at location
             this.player = new MadHacks.Player(this.game, 50, 50);
             this.player.body.collideWorldBounds = true;

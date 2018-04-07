@@ -3,8 +3,7 @@
 	export class Tutorial1 extends Phaser.State {
 
 		preload() {
-			this.game.load.image('background', 'Assets/LevelBackground.png');
-			this.game.load.image('player', 'Assets/Player.png');
+			
 		}
 
 		update() {
@@ -18,7 +17,7 @@
 
 		// Create
         create() {
-			this.background = this.add.sprite(0, 0, 'background');
+			this.background = this.add.sprite(0, 0, 'Background');
 
 			// Place player at location
             this.player = new Player(this.game, 50, 50);
