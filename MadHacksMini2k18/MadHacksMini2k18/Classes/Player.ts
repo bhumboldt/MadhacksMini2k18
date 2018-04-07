@@ -97,6 +97,8 @@
             if (obj2.y - (obj1.y + obj1.height) < 1 && obj2.y - (obj1.y + obj1.height) >= 0) {
                 obj1.body.velocity.y = 0;
                 obj1.canJump = true;
+            } else if (obj1.body.velocity.y === 0) {
+                obj1.canJump = true;
             }
         }
 
