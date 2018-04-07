@@ -1,28 +1,33 @@
-﻿class MadHacksMini2k18 {
+﻿module MadHacks {
 
-    constructor() {
-        this.game = new Phaser.Game(800, 600, Phaser.AUTO, 'content', { preload: this.preload, create: this.create });
-    }
+	export class MadHacksMini2k18 {
 
-    game: Phaser.Game;
+		constructor() {
+			this.game = new Phaser.Game(800, 600, Phaser.AUTO, 'content', { preload: this.preload, create: this.create });
+		}
 
-    preload() {
-        this.game.load.image('logo', 'phaser2.png');
-    }
+		game: Phaser.Game;
 
-    create() {
-        var logo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo');
-        logo.anchor.setTo(0.5, 0.5);
+		preload() {
+			this.game.load.image('logo', 'phaser2.png');
+			
+		}
 
-        this.game.state.add('tutorial1', new Tutorial1());
+		create() {
+			var logo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo');
+			logo.anchor.setTo(0.5, 0.5);
 
-        this.game.state.start('tutorial1');
-    }
+			this.game.state.add('Tutorial1', MadHacks.Tutorial1, false);
+
+			this.game.state.start('Tutorial1');
+		}
+
+	}
+
+	window.onload = () => {
+
+		var game = new MadHacksMini2k18();
+
+	};
 
 }
-
-window.onload = () => {
-
-    var game = new MadHacksMini2k18();
-
-};

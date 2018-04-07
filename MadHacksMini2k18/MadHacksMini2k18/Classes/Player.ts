@@ -1,13 +1,16 @@
-﻿class Player {
-    sprite: string;
-    isTouchingGround: boolean;
+﻿module MadHacks {
 
-    update() {
+	export class Player extends Phaser.Sprite{
+		sprite: string;
+		isTouchingGround: boolean;
 
-    }
+		update() {
 
-    create() {
+		}
 
-    }
+		create() {
+
+		}
+	}
+
 }
-
