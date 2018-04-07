@@ -42,6 +42,10 @@ var MadHacks;
         };
         Player.prototype.create = function () {
         };
+        Player.prototype.collisionHandler = function (obj1, obj2) {
+            obj1.body.velocity.y = 0;
+            console.log("collision");
+        };
         return Player;
     }(Phaser.Sprite));
     MadHacks.Player = Player;

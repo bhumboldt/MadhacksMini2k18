@@ -42,7 +42,13 @@
 
 		create() {
 
-		}
+        }
+
+        collisionHandler(obj1, obj2) {
+            obj1.body.velocity.y = 0;
+            console.log("collision");
+
+        }
 	}
 
 }

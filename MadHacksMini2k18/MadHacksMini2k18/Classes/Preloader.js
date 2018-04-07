@@ -20,6 +20,7 @@ var MadHacks;
             this.load.image('MainMenuBackground', 'Assets/MainMenuBackground.png');
             this.load.image('Background', 'Assets/LevelBackground.png');
             this.load.image('Player', 'Assets/Player.png');
+            this.load.image('Tile', 'Assets/Tile.png');
         };
         Preloader.prototype.create = function () {
             this.game.state.start('MainMenu');

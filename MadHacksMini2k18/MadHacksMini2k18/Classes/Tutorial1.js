@@ -17,15 +17,17 @@ var MadHacks;
         }
         Tutorial1.prototype.preload = function () {
         };
-        Tutorial1.prototype.update = function () {
-        };
         // Create
         Tutorial1.prototype.create = function () {
             this.background = this.add.sprite(0, 0, 'Background');
             // Place player at location
             this.player = new MadHacks.Player(this.game, 50, 50);
+            this.tile = new MadHacks.Tile(this.game, 100, 100);
             this.player.body.collideWorldBounds = true;
             //this.player.body.bounce.y = 0.8;
+        };
+        Tutorial1.prototype.update = function () {
+            this.game.physics.arcade.collide(this.player, this.tile, this.player.collisionHandler, null, this);
         };
         return Tutorial1;
     }(Phaser.State));
