@@ -2,8 +2,14 @@
 
 	export class Player extends Phaser.Sprite{
 		sprite: string;
-		isTouchingGround: boolean;
-
+        isTouchingGround: boolean;
+        pLeft: boolean;
+        pRight: boolean;
+        pWait: boolean;
+        pJump: boolean;
+        actions: PlayerActions[];
+        frames: number;
+        currentAction: string;
 		preload() {
 
 		}
@@ -15,28 +21,76 @@
 			this.anchor.setTo(0.5, 0);
             game.add.existing(this);
             this.isTouchingGround = true;
+            this.pWait = true;
+            this.frames = 0;
+            this.currentAction ="WAIT";
 		}
-		update() {
+        update() {
+
+            // If player was and is waiting
+            if (this.pWait && this.currentAction === "WAIT") {
+                this.frames++;
+            }
+
+            // If player was and is moving right
+            else if (this.pRight && this.currentAction === "RIGHT") {
+                this.frames++;
+            }
+
+            // If player was and is moving left
+            else if (this.pLeft && this.currentAction === "LEFT") {
+                this.frames++;
+            }
+
+            // Add the action to the list of actions once the action changes
+            else {
+                this.actions.push(new PlayerActions(this.currentAction, this.frames));
+                this.frames = 0;
+            }
+
+            // Add jump to the action list
+            if (this.pJump) {
+                this.actions.push(new PlayerActions("JUMP", this.frames));
+                
+            }
 
 			// Movement for the player
-			if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
+                this.pLeft = true;
+                this.pRight = false;
+                this.pWait = false;
+                this.currentAction = "LEFT";
 				this.body.velocity.x = -150;
 			}
 
-			else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+            else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+                this.pLeft = false;
+                this.pRight = true;
+                this.pWait = false;
+                this.currentAction = "RIGHT";
 				this.body.velocity.x = 150;
 			}
 
-			else {
+            else {
+                this.pLeft = false;
+                this.pRight = false;
+                this.pWait = true;
+                this.currentAction = "WAIT";
 				this.body.velocity.x = 0;
 			}
 
 			// Jumping
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
 				if (this.isTouchingGround) {
-		        	this.body.velocity.y = -150;
+                    this.body.velocity.y = -250;
+                    this.isTouchingGround = false;
 				} 
 			}
+
+
+            // Logic to add to player actions
+
+
 
 		}
 
@@ -44,9 +98,9 @@
 
         }
 
-        collisionHandler(obj1, obj2) {
+        collisionHandler(obj1: Player, obj2) {
             obj1.body.velocity.y = 0;
-            console.log("collision");
+            obj1.isTouchingGround = true;
 
         }
 	}

@@ -82,6 +82,10 @@
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="box2d.d.ts" />
     <TypeScriptCompile Include="Classes\Boot.ts" />
+    <TypeScriptCompile Include="Classes\Exit.ts" />
+    <TypeScriptCompile Include="Classes\EPlayerActions.ts" />
+    <TypeScriptCompile Include="Classes\PlayerActions.ts" />
+    <TypeScriptCompile Include="Classes\Ghost.ts" />
     <TypeScriptCompile Include="Classes\Tile.ts" />
     <TypeScriptCompile Include="Classes\Game.ts" />
     <TypeScriptCompile Include="Classes\MainMenu.ts" />

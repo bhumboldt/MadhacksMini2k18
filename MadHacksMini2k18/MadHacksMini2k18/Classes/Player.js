@@ -18,33 +18,68 @@ var MadHacks;
             _this.anchor.setTo(0.5, 0);
             game.add.existing(_this);
             _this.isTouchingGround = true;
+            _this.pWait = true;
+            _this.frames = 0;
+            _this.currentAction = "WAIT";
             return _this;
         }
         Player.prototype.preload = function () {
         };
         Player.prototype.update = function () {
+            // If player was and is waiting
+            if (this.pWait && this.currentAction === "WAIT") {
+                this.frames++;
+            }
+            else if (this.pRight && this.currentAction === "RIGHT") {
+                this.frames++;
+            }
+            else if (this.pLeft && this.currentAction === "LEFT") {
+                this.frames++;
+            }
+            else {
+                this.actions.push(new MadHacks.PlayerActions(this.currentAction, this.frames));
+                this.frames = 0;
+            }
+            // Add jump to the action list
+            if (this.pJump) {
+                this.actions.push(new MadHacks.PlayerActions("JUMP", this.frames));
+            }
             // Movement for the player
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
+                this.pLeft = true;
+                this.pRight = false;
+                this.pWait = false;
+                this.currentAction = "LEFT";
                 this.body.velocity.x = -150;
             }
             else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+                this.pLeft = false;
+                this.pRight = true;
+                this.pWait = false;
+                this.currentAction = "RIGHT";
                 this.body.velocity.x = 150;
             }
             else {
+                this.pLeft = false;
+                this.pRight = false;
+                this.pWait = true;
+                this.currentAction = "WAIT";
                 this.body.velocity.x = 0;
             }
             // Jumping
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
                 if (this.isTouchingGround) {
-                    this.body.velocity.y = -150;
+                    this.body.velocity.y = -250;
+                    this.isTouchingGround = false;
                 }
             }
+            // Logic to add to player actions
         };
         Player.prototype.create = function () {
         };
         Player.prototype.collisionHandler = function (obj1, obj2) {
             obj1.body.velocity.y = 0;
-            console.log("collision");
+            obj1.isTouchingGround = true;
         };
         return Player;
     }(Phaser.Sprite));

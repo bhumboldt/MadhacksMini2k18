@@ -11,9 +11,10 @@
             'x                  x',
             'x                  x',
             'x p                x',
-            'xxxxxxxxxxxxxxxxxxxx'
+            'xxxxxxxxxxxxxxxxxxex'
         ]
         tiles = [];
+        exit: MadHacks.Exit;
 
         loadLevel() {
             for (let i = 0; i < this.level.length; i++) {
@@ -26,6 +27,10 @@
                     if (this.level[i][j] === 'p') {
                         this.player = new Player(this.game, j * 32, i * 32);
                         this.player.body.collideWorldBounds = true;
+                    }
+
+                    if (this.level[i][j] === 'e') {
+                        this.exit = new Exit(this.game, j * 32, i * 32);
                     }
                 }
             }
