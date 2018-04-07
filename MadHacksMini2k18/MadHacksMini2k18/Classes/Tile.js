@@ -17,7 +17,6 @@ var MadHacks;
             _this.game.physics.arcade.enableBody(_this);
             _this.body.allowGravity = false;
             _this.body.immovable = true;
-            //this.anchor.setTo(0.5, 0);
             game.add.existing(_this);
             return _this;
         }
