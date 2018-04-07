@@ -3,6 +3,7 @@
     export class Ghost extends Phaser.Sprite {
         sprite: string;
         isTouchingGround: boolean;
+        canJump: boolean;
         isDead: boolean;
         frames: number;
         freeze: boolean;
@@ -24,31 +25,30 @@
             }
             let curAction = actions.shift();
             this.action = curAction.actions;
-            this.frames = curAction.frames;       
+            this.frames = curAction.frames;  
+            this.canJump = true;
         }
 
         update() {
+            console.log("Ghost action " + this.action + "can jump " + this.canJump);
             if (!this.freeze) {
                 if (this.action === "LEFT") {
                     this.body.velocity.x = -150;
-                    console.log('LEFTTT');
                 }
 
                 else if (this.action === "RIGHT") {
                     this.body.velocity.x = 150;
-                    console.log("RIGHTTTT");
                 }
 
                 else {
                     this.body.velocity.x = 0;
-                    console.log("WAIIITTTT");
                 }
 
                 // Jumping
                 if (this.action === "JUMP") {
-                    if (this.isTouchingGround) {
+                    if (this.canJump) {
                         this.body.velocity.y = -250;
-                        this.isTouchingGround = false;
+                        this.canJump = false;
                     }
                     this.frames = 0;
                 }
@@ -63,6 +63,9 @@
                         this.freeze = true;
                     }
                 }
+            }
+            else {
+                this.body.velocity.x = 0;
             }
         }
 
