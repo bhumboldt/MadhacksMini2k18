@@ -9,6 +9,7 @@
             this.load.image('Exit', 'Assets/Exit.png');
             this.load.image('Trap', 'Assets/Trap.png');
             this.load.image('Collectible', 'Assets/Collectible.png');
+            this.load.image('Wall', 'Assets/Tile.png');
         }
 
         create() {

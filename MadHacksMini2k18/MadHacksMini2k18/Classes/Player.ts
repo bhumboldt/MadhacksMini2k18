@@ -26,7 +26,7 @@
 			this.game.physics.arcade.enableBody(this);
 			this.anchor.setTo(0.5, 0);
             game.add.existing(this);
-            this.canJump = false;
+            this.canJump = true;
             this.jumpTimer = 0;
             this.pWait = true;
             this.isDead = false;
@@ -43,14 +43,14 @@
             if (this.isDead) {
                 this.game.state.restart(true, false);
             }
-            if (this.body.velocity.y === 0) {
-                if (this.jumpTimer === 0) {
-                    this.canJump = true;
-                } else {
-                    this.jumpTimer = 0;
-                    console.log("reduce timer");
-                }
-            }
+            //if (this.body.velocity.y === 0) {
+            //    if (this.jumpTimer === 0) {
+            //        this.canJump = true;
+            //    } else {
+            //        this.jumpTimer = 0;
+            //        console.log("reduce timer");
+            //    }
+            //}
             // Get current action
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) this.currentAction = "LEFT";
             else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) this.currentAction = "RIGHT";
@@ -97,10 +97,6 @@
                     this.frames = 0;
 				} 
 			}
-            // Logic to add to player actions
-
-
-
 		}
 
 		create() {
@@ -109,8 +105,7 @@
 
         collisionHandler(obj1: Player, obj2) {
             obj1.body.velocity.y = 0;
-            obj1.isTouchingGround = true;
-
+            obj1.canJump = true;
         }
 
         trapCollisionHandler(obj1: Player, obj2: Trap) {

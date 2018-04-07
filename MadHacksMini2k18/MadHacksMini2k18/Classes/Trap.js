@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Trap = (function (_super) {
+    var Trap = /** @class */ (function (_super) {
         __extends(Trap, _super);
         function Trap(game, x, y) {
             var _this = _super.call(this, game, x, y, 'Trap', 0) || this;

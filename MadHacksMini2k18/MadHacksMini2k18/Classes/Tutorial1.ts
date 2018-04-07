@@ -3,14 +3,14 @@
 	export class Tutorial1 extends Phaser.State {
         level = [
             'xxxxxxxxxxxxxxxxxxxx',
-            'x                  x',
-            'x                  x',
-            'x                  x',
-            'x                  x',
-            'x        c         x',
-            'x                  x',
-            'x                  x',
-            'x p       t        x',
+            'w                  w',
+            'w                  w',
+            'w                  w',
+            'w                  w',
+            'w        c         w',
+            'w                  w',
+            'w                  w',
+            'w p       t        w',
             'xxxxxxxxxxxxxxxxxxex'
         ]
         tiles = [];
@@ -23,6 +23,7 @@
         score = 0;
         scoreText: Phaser.Text;
         ghostTexts = [];
+        walls = [];
 
         loadLevel() {
             for (let i = 0; i < this.level.length; i++) {
@@ -49,6 +50,11 @@
                     if (this.level[i][j] === 'c') {
                         let collectible = new Collectible(this.game, j * 32, i * 32);
                         this.collectibles.push(collectible);
+                    }
+
+                    if (this.level[i][j] === 'w') {
+                        let wall = new Wall(this.game, j * 32, i * 32);
+                        this.walls.push(wall);
                     }
                 }
             }
@@ -106,6 +112,21 @@
             for (let i = 0; i < this.ghosts.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.ghosts[i], this.ghostCollisionHandler, null, this);
             }
+
+            for (let i = 0; i < this.walls.length; i++) {
+                this.game.physics.arcade.collide(this.player, this.walls[i], this.wallCollisionHandler, null, this);
+                for (let j = 0; j < this.ghosts.length; j++) {
+                    this.game.physics.arcade.collide(this.ghosts[j], this.walls[i], this.wallGhostCollisionHandler, null, this);
+                }
+            }
+        }
+
+        wallGhostCollisionHandler(obj1: Ghost, obj2: Wall) {
+
+        }
+
+        wallCollisionHandler(obj1: Player, obj2: Wall) {
+
         }
 
         collectibleCollisionHandler(obj1: Player, obj2: Collectible) {
@@ -115,7 +136,7 @@
         }
 
         ghostCollisionHandler(obj1: Player, obj2: Ghost) {
-
+            obj1.canJump = true;
         }
 
         trapCollisionHandler(obj1: Player, obj2: Trap) {

@@ -95,6 +95,7 @@
     <TypeScriptCompile Include="Classes\Preloader.ts" />
     <TypeScriptCompile Include="Classes\Trap.ts" />
     <TypeScriptCompile Include="Classes\Tutorial2.ts" />
+    <TypeScriptCompile Include="Classes\Wall.ts" />
     <TypeScriptCompile Include="p2.d.ts" />
     <TypeScriptCompile Include="phaser.comments.d.ts" />
     <TypeScriptCompile Include="phaser.d.ts" />

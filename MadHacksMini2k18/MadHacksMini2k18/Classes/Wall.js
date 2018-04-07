@@ -10,18 +10,18 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Exit = /** @class */ (function (_super) {
-        __extends(Exit, _super);
-        function Exit(game, x, y) {
-            var _this = _super.call(this, game, x, y, 'Exit', 0) || this;
+    var Wall = /** @class */ (function (_super) {
+        __extends(Wall, _super);
+        function Wall(game, x, y) {
+            var _this = _super.call(this, game, x, y, 'Wall') || this;
             _this.game.physics.arcade.enableBody(_this);
             _this.body.allowGravity = false;
             _this.body.immovable = true;
             game.add.existing(_this);
             return _this;
         }
-        return Exit;
+        return Wall;
     }(Phaser.Sprite));
-    MadHacks.Exit = Exit;
+    MadHacks.Wall = Wall;
 })(MadHacks || (MadHacks = {}));
-//# sourceMappingURL=Exit.js.map
+//# sourceMappingURL=Wall.js.map

@@ -15,6 +15,7 @@ var MadHacks;
         function Ghost(game, x, y, actions) {
             var _this = _super.call(this, game, x, y, 'Player', 0) || this;
             _this.game.physics.arcade.enableBody(_this);
+            //this.body.immovable = true;
             game.add.existing(_this);
             _this.isTouchingGround = true;
             _this.actions = JSON.parse(JSON.stringify(actions));
@@ -32,9 +33,6 @@ var MadHacks;
         Ghost.prototype.preload = function () {
         };
         Ghost.prototype.update = function () {
-            if (this.isDead) {
-                this.destroy();
-            }
             console.log("Ghost action: " + this.action);
             if (!this.freeze) {
                 if (this.action === "LEFT") {
@@ -55,6 +53,7 @@ var MadHacks;
                         this.body.velocity.y = -250;
                         this.isTouchingGround = false;
                     }
+                    this.frames = 0;
                 }
                 this.frames--;
                 if (this.frames <= 0) {
@@ -77,6 +76,7 @@ var MadHacks;
         };
         Ghost.prototype.trapCollisionHandler = function (obj1, obj2) {
             obj1.isDead = true;
+            obj1.destroy();
             for (var i = 0; i < obj1.actions.length; i++) {
                 //console.log(obj1.actions[i].actions + " " + obj1.actions[i].frames);
             }

@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Tutorial2 = (function (_super) {
+    var Tutorial2 = /** @class */ (function (_super) {
         __extends(Tutorial2, _super);
         function Tutorial2() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
