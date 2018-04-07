@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Player = /** @class */ (function (_super) {
+    var Player = (function (_super) {
         __extends(Player, _super);
         function Player(game, x, y) {
             var _this = _super.call(this, game, x, y, 'Player', 0) || this;
@@ -34,6 +34,7 @@ var MadHacks;
         Player.prototype.preload = function () {
         };
         Player.prototype.update = function () {
+            console.log("y velocity begin" + this.body.velocity.y);
             //console.log(this.currentAction);
             if (this.isDead) {
                 this.game.state.restart(true, false);
@@ -69,8 +70,10 @@ var MadHacks;
             }
             // Jumping
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+                console.log("pressing space");
                 if (this.canJump) {
-                    this.body.velocity.y = -250;
+                    this.body.velocity.y = -300;
+                    console.log("am jumpin" + this.body.velocity.y);
                     this.canJump = false;
                     this.actions.push(new MadHacks.PlayerActions(this.oldAction, this.frames));
                     // Pull out of if statement
@@ -78,13 +81,13 @@ var MadHacks;
                     this.frames = 0;
                 }
             }
+            console.log("y velocity" + this.body.velocity.y);
         };
         Player.prototype.create = function () {
             // this.game.input.onDown.addOnce()
         };
         Player.prototype.collisionHandler = function (obj1, obj2) {
             if (obj2.y - (obj1.y + obj1.height) < 1 && obj2.y - (obj1.y + obj1.height) >= 0) {
-                obj1.body.velocity.y = 0;
                 obj1.canJump = true;
             }
             else if (obj1.body.velocity.y === 0) {
