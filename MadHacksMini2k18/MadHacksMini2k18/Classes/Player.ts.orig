@@ -3,14 +3,18 @@
 	export class Player extends Phaser.Sprite{
 		sprite: string;
         isTouchingGround: boolean;
+<<<<<<< .merge_file_a17436
         pLeft: boolean;
-        isDead = true;
         pRight: boolean;
         pWait: boolean;
         pJump: boolean;
         actions: PlayerActions[];
         frames: number;
         currentAction: string;
+=======
+        isDead = true;
+
+>>>>>>> .merge_file_a17632
 		preload() {
 
 		}
@@ -22,15 +26,12 @@
 			this.anchor.setTo(0.5, 0);
             game.add.existing(this);
             this.isTouchingGround = true;
+<<<<<<< .merge_file_a17436
             this.pWait = true;
-            this.isDead = false;
             this.frames = 0;
             this.currentAction ="WAIT";
 		}
         update() {
-            if (this.isDead) {
-                this.game.state.restart(true, false);
-            }
 
             // If player was and is waiting
             if (this.pWait && this.currentAction === "WAIT") {
@@ -57,6 +58,13 @@
             if (this.pJump) {
                 this.actions.push(new PlayerActions("JUMP", this.frames));
                 
+=======
+            this.isDead = false;
+		}
+        update() {
+            if (this.isDead) {
+                this.game.state.restart(true, false);
+>>>>>>> .merge_file_a17632
             }
 
 			// Movement for the player

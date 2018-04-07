@@ -10,11 +10,12 @@
             'x                  x',
             'x                  x',
             'x                  x',
-            'x p                x',
+            'x p       t        x',
             'xxxxxxxxxxxxxxxxxxex'
         ]
         tiles = [];
         exit: MadHacks.Exit;
+        traps = [];
 
         loadLevel() {
             for (let i = 0; i < this.level.length; i++) {
@@ -32,6 +33,11 @@
                     if (this.level[i][j] === 'e') {
                         this.exit = new Exit(this.game, j * 32, i * 32);
                     }
+
+                    if (this.level[i][j] === 't') {
+                        let trap = new Trap(this.game, j * 32, i * 32);
+                        this.traps.push(trap);
+                    }
                 }
             }
         }
@@ -44,6 +50,10 @@
             for (let i = 0; i < this.tiles.length; i++) {
 
                 this.game.physics.arcade.collide(this.player, this.tiles[i], this.player.collisionHandler, null, this);
+            }
+
+            for (let i = 0; i < this.traps.length; i++) {
+                this.game.physics.arcade.collide(this.player, this.traps[i], this.player.trapCollisionHandler, null, this);
             }
 		}
 
