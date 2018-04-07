@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Tutorial1 = (function (_super) {
+    var Tutorial1 = /** @class */ (function (_super) {
         __extends(Tutorial1, _super);
         function Tutorial1() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -24,7 +24,7 @@ var MadHacks;
                 'x                  x',
                 'x                  x',
                 'x p                x',
-                'xxxxxxxxxxxxxxxxxxxx'
+                'xxxxxxxxxxxxxxxxxxex'
             ];
             _this.tiles = [];
             return _this;
@@ -39,6 +39,9 @@ var MadHacks;
                     if (this.level[i][j] === 'p') {
                         this.player = new MadHacks.Player(this.game, j * 32, i * 32);
                         this.player.body.collideWorldBounds = true;
+                    }
+                    if (this.level[i][j] === 'e') {
+                        this.exit = new MadHacks.Exit(this.game, j * 32, i * 32);
                     }
                 }
             }

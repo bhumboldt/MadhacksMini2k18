@@ -34,7 +34,8 @@
 			// Jumping
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
 				if (this.isTouchingGround) {
-		        	this.body.velocity.y = -150;
+                    this.body.velocity.y = -250;
+                    this.isTouchingGround = false;
 				} 
 			}
 
@@ -44,9 +45,9 @@
 
         }
 
-        collisionHandler(obj1, obj2) {
+        collisionHandler(obj1: Player, obj2) {
             obj1.body.velocity.y = 0;
-            console.log("collision");
+            obj1.isTouchingGround = true;
 
         }
 	}

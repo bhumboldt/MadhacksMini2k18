@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Player = (function (_super) {
+    var Player = /** @class */ (function (_super) {
         __extends(Player, _super);
         function Player(game, x, y) {
             var _this = _super.call(this, game, x, y, 'Player', 0) || this;
@@ -36,7 +36,8 @@ var MadHacks;
             // Jumping
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
                 if (this.isTouchingGround) {
-                    this.body.velocity.y = -150;
+                    this.body.velocity.y = -250;
+                    this.isTouchingGround = false;
                 }
             }
         };
@@ -44,7 +45,7 @@ var MadHacks;
         };
         Player.prototype.collisionHandler = function (obj1, obj2) {
             obj1.body.velocity.y = 0;
-            console.log("collision");
+            obj1.isTouchingGround = true;
         };
         return Player;
     }(Phaser.Sprite));
