@@ -21,7 +21,7 @@ var MadHacks;
             this.input.onDown.addOnce(this.startGame, this);
         };
         MainMenu.prototype.startGame = function () {
-            this.game.state.start('Tutorial1', true, false);
+            this.game.state.start('Level', true, false);
         };
         return MainMenu;
     }(Phaser.State));

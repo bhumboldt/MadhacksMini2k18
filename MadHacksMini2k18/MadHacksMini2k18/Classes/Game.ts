@@ -6,8 +6,7 @@
             this.state.add('Boot', MadHacks.Boot, false);
             this.state.add('Preloader', MadHacks.Preloader, false);
             this.state.add('MainMenu', MadHacks.MainMenu, false);
-            this.state.add('Tutorial1', MadHacks.Tutorial1, false);
-            this.state.add('Tutorial2', MadHacks.Tutorial2, false);
+            this.state.add('Level', MadHacks.Level, false);
             this.state.start('Boot');
         }
     }
