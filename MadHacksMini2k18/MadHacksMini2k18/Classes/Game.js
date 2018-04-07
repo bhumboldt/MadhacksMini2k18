@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Game = (function (_super) {
+    var Game = /** @class */ (function (_super) {
         __extends(Game, _super);
         function Game() {
             var _this = _super.call(this, 640, 320, Phaser.AUTO, 'content', null) || this;
@@ -18,6 +18,7 @@ var MadHacks;
             _this.state.add('Preloader', MadHacks.Preloader, false);
             _this.state.add('MainMenu', MadHacks.MainMenu, false);
             _this.state.add('Tutorial1', MadHacks.Tutorial1, false);
+            _this.state.add('Tutorial2', MadHacks.Tutorial2, false);
             _this.state.start('Boot');
             return _this;
         }

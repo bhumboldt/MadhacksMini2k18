@@ -10,35 +10,29 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Tutorial1 = /** @class */ (function (_super) {
-        __extends(Tutorial1, _super);
-        function Tutorial1() {
+    var Tutorial2 = /** @class */ (function (_super) {
+        __extends(Tutorial2, _super);
+        function Tutorial2() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
             _this.level = [
-                'xxxxxxxxxxxxxxxxxxxx',
+                'xxxxxxxxxxxxxxxexxxx',
                 'x                  x',
                 'x                  x',
-                'x                  x',
-                'x                  x',
+                'x t                x',
+                'x             c   xx',
                 'x        c         x',
-                'x                  x',
-                'x                  x',
-                'x p       t        x',
-                'xxxxxxxxxxxxxxxxxxex'
+                'x             c   xx',
+                'x   c              x',
+                'x p          t     x',
+                'xxxxxxxxxxxxxxxxxtxx'
             ];
             _this.tiles = [];
             _this.traps = [];
-<<<<<<< HEAD
-            _this.ghosts = [];
-            _this.timer = 1000;
-            _this.canPress = true;
-=======
             _this.collectibles = [];
             _this.score = 0;
->>>>>>> 08de73585ed54cb61368cb19e17e2d0fb12cca1a
             return _this;
         }
-        Tutorial1.prototype.loadLevel = function () {
+        Tutorial2.prototype.loadLevel = function () {
             for (var i = 0; i < this.level.length; i++) {
                 for (var j = 0; j < this.level[i].length; j++) {
                     if (this.level[i][j] === 'x') {
@@ -63,74 +57,47 @@ var MadHacks;
                 }
             }
         };
-        Tutorial1.prototype.preload = function () {
+        Tutorial2.prototype.preload = function () {
         };
-        Tutorial1.prototype.update = function () {
-            if (!this.canPress) {
-                this.timer--;
-            }
-            if (this.timer == 0) {
-                this.canPress = true;
-                this.timer = 100;
-            }
+        Tutorial2.prototype.update = function () {
             for (var i = 0; i < this.tiles.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.tiles[i], this.player.collisionHandler, null, this);
-                for (var j = 0; j < this.ghosts.length; j++) {
-                    this.game.physics.arcade.collide(this.ghosts[j], this.tiles[i], this.ghosts[j].collisionHandler, null, this);
-                }
             }
             for (var i = 0; i < this.traps.length; i++) {
-<<<<<<< HEAD
-                this.game.physics.arcade.collide(this.player, this.traps[i], this.player.trapCollisionHandler, null, this);
-                for (var j = 0; j < this.ghosts.length; j++) {
-                    this.game.physics.arcade.collide(this.ghosts[j], this.traps[i], this.ghosts[j].trapCollisionHandler, null, this);
-                }
-            }
-            if (this.canPress && this.game.input.keyboard.isDown(Phaser.Keyboard.Z)) {
-                this.canPress = false;
-                this.player.actions.push(new MadHacks.PlayerActions(this.player.oldAction, this.player.frames));
-                this.player.frames = 0;
-                this.addGhost();
-=======
                 this.game.physics.arcade.collide(this.player, this.traps[i], this.trapCollisionHandler, null, this);
             }
             for (var i = 0; i < this.collectibles.length; i++) {
                 this.game.physics.arcade.overlap(this.player, this.collectibles[i], this.collectibleCollisionHandler, null, this);
             }
             if (this.game.physics.arcade.overlap(this.player, this.exit, this.exitCollisionHandler, null, this)) {
->>>>>>> 08de73585ed54cb61368cb19e17e2d0fb12cca1a
             }
         };
-        Tutorial1.prototype.collectibleCollisionHandler = function (obj1, obj2) {
+        Tutorial2.prototype.collectibleCollisionHandler = function (obj1, obj2) {
             obj2.destroy(true);
             this.score++;
             this.scoreText.text = 'Score: ' + this.score;
         };
-        Tutorial1.prototype.trapCollisionHandler = function (obj1, obj2) {
+        Tutorial2.prototype.trapCollisionHandler = function (obj1, obj2) {
             obj1.isDead = true;
             this.score = 0;
             this.scoreText.text = 'Score: ' + this.score;
         };
-        Tutorial1.prototype.exitCollisionHandler = function (obj1, obj2) {
+        Tutorial2.prototype.exitCollisionHandler = function (obj1, obj2) {
             this.game.state.start('Tutorial2');
         };
         // Create
-        Tutorial1.prototype.create = function () {
+        Tutorial2.prototype.create = function () {
             this.background = this.add.sprite(0, 0, 'Background');
             this.loadLevel();
             this.scoreText = this.game.add.text(10, 10, 'Score: ' + this.score, {
                 font: '15px Arial'
             });
         };
-        Tutorial1.prototype.restart = function () {
+        Tutorial2.prototype.restart = function () {
             this.score = 0;
         };
-        // Adds a ghost to the level
-        Tutorial1.prototype.addGhost = function () {
-            this.ghosts.push(new MadHacks.Ghost(this.game, 100, 100, this.player.actions));
-        };
-        return Tutorial1;
+        return Tutorial2;
     }(Phaser.State));
-    MadHacks.Tutorial1 = Tutorial1;
+    MadHacks.Tutorial2 = Tutorial2;
 })(MadHacks || (MadHacks = {}));
-//# sourceMappingURL=Tutorial1.js.map
+//# sourceMappingURL=Tutorial2.js.map

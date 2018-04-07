@@ -1,6 +1,6 @@
 var MadHacks;
 (function (MadHacks) {
-    var PlayerActions = (function () {
+    var PlayerActions = /** @class */ (function () {
         function PlayerActions(actions, frames) {
             this.actions = actions;
             this.frames = frames;

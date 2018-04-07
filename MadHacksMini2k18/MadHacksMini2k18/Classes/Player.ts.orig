@@ -3,18 +3,16 @@
 	export class Player extends Phaser.Sprite{
 		sprite: string;
         isTouchingGround: boolean;
-<<<<<<< .merge_file_a17436
         pLeft: boolean;
+        isDead = true;
+        isGhost = false;
         pRight: boolean;
         pWait: boolean;
         pJump: boolean;
         actions: PlayerActions[];
         frames: number;
+        oldAction: string;
         currentAction: string;
-=======
-        isDead = true;
-
->>>>>>> .merge_file_a17632
 		preload() {
 
 		}
@@ -26,69 +24,49 @@
 			this.anchor.setTo(0.5, 0);
             game.add.existing(this);
             this.isTouchingGround = true;
-<<<<<<< .merge_file_a17436
             this.pWait = true;
+            this.isDead = false;
             this.frames = 0;
-            this.currentAction ="WAIT";
+            this.oldAction = "WAIT";
+            this.currentAction = "WAIT";
+            this.actions = new Array<PlayerActions>();
 		}
         update() {
+            //console.log(this.currentAction);
+            if (this.isDead) {
+                this.game.state.restart(true, false);
+            }
+
+            // Get current action
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) this.currentAction = "LEFT";
+            else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) this.currentAction = "RIGHT";
+            else this.currentAction = "WAIT";
 
             // If player was and is waiting
-            if (this.pWait && this.currentAction === "WAIT") {
-                this.frames++;
-            }
-
-            // If player was and is moving right
-            else if (this.pRight && this.currentAction === "RIGHT") {
-                this.frames++;
-            }
-
-            // If player was and is moving left
-            else if (this.pLeft && this.currentAction === "LEFT") {
+            if (this.oldAction === this.currentAction) {
                 this.frames++;
             }
 
             // Add the action to the list of actions once the action changes
             else {
-                this.actions.push(new PlayerActions(this.currentAction, this.frames));
+                //console.log("Added action");
+                this.actions.push(new PlayerActions(this.oldAction, this.frames));
                 this.frames = 0;
-            }
-
-            // Add jump to the action list
-            if (this.pJump) {
-                this.actions.push(new PlayerActions("JUMP", this.frames));
-                
-=======
-            this.isDead = false;
-		}
-        update() {
-            if (this.isDead) {
-                this.game.state.restart(true, false);
->>>>>>> .merge_file_a17632
             }
 
 			// Movement for the player
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
-                this.pLeft = true;
-                this.pRight = false;
-                this.pWait = false;
-                this.currentAction = "LEFT";
+                this.oldAction = "LEFT";
 				this.body.velocity.x = -150;
 			}
 
             else if (this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-                this.pLeft = false;
-                this.pRight = true;
-                this.pWait = false;
-                this.currentAction = "RIGHT";
+                this.oldAction = "RIGHT"
 				this.body.velocity.x = 150;
 			}
 
             else {
-                this.pLeft = false;
-                this.pRight = false;
-                this.pWait = true;
-                this.currentAction = "WAIT";
+                this.oldAction = "WAIT";
 				this.body.velocity.x = 0;
 			}
 
@@ -97,10 +75,11 @@
 				if (this.isTouchingGround) {
                     this.body.velocity.y = -250;
                     this.isTouchingGround = false;
+                    this.actions.push(new PlayerActions(this.oldAction, this.frames));
+                    this.actions.push(new PlayerActions("JUMP", this.frames));
+                    this.frames = 0;
 				} 
 			}
-
-
             // Logic to add to player actions
 
 
@@ -108,7 +87,7 @@
 		}
 
 		create() {
-
+           // this.game.input.onDown.addOnce()
         }
 
         collisionHandler(obj1: Player, obj2) {
@@ -116,10 +95,17 @@
             obj1.isTouchingGround = true;
 
         }
+<<<<<<< HEAD
 
         trapCollisionHandler(obj1: Player, obj2: Trap) {
             obj1.isDead = true;
+            for (let i = 0; i < obj1.actions.length; i++) {
+                console.log(obj1.actions[i].actions + " " + obj1.actions[i].frames);
+            }
+
         }
+=======
+>>>>>>> 08de73585ed54cb61368cb19e17e2d0fb12cca1a
 	}
 
 }

@@ -95,14 +95,10 @@
             obj1.isTouchingGround = true;
 
         }
-
-        trapCollisionHandler(obj1: Player, obj2: Trap) {
-            obj1.isDead = true;
             for (let i = 0; i < obj1.actions.length; i++) {
                 console.log(obj1.actions[i].actions + " " + obj1.actions[i].frames);
             }
 
-        }
 	}
 
 }

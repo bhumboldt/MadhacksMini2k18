@@ -1,27 +1,25 @@
 ﻿module MadHacks {
-
-	export class Tutorial1 extends Phaser.State {
+    export class Tutorial2 extends Phaser.State {
         level = [
-            'xxxxxxxxxxxxxxxxxxxx',
+            'xxxxxxxxxxxxxxxexxxx',
             'x                  x',
             'x                  x',
-            'x                  x',
-            'x                  x',
+            'x t                x',
+            'x             c   xx',
             'x        c         x',
-            'x                  x',
-            'x                  x',
-            'x p       t        x',
-            'xxxxxxxxxxxxxxxxxxex'
+            'x             c   xx',
+            'x   c              x',
+            'x p          t     x',
+            'xxxxxxxxxxxxxxxxxtxx'
         ]
+
         tiles = [];
         exit: MadHacks.Exit;
         traps = [];
-        ghosts = [];
-        timer = 1000;
-        canPress = true;
         collectibles = [];
         score = 0;
         scoreText: Phaser.Text;
+
         loadLevel() {
             for (let i = 0; i < this.level.length; i++) {
                 for (let j = 0; j < this.level[i].length; j++) {
@@ -52,40 +50,18 @@
             }
         }
 
-		preload() {
-			
-		}
+        preload() {
+
+        }
 
         update() {
-            if (!this.canPress) {
-                this.timer--;
-            }
-
-            if (this.timer == 0) {
-                this.canPress = true;
-                this.timer = 100;
-            }
-
             for (let i = 0; i < this.tiles.length; i++) {
 
                 this.game.physics.arcade.collide(this.player, this.tiles[i], this.player.collisionHandler, null, this);
-                for (let j = 0; j < this.ghosts.length; j++) {
-                    this.game.physics.arcade.collide(this.ghosts[j], this.tiles[i], this.ghosts[j].collisionHandler, null, this);
-                }
             }
 
             for (let i = 0; i < this.traps.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.traps[i], this.trapCollisionHandler, null, this);
-                for (let j = 0; j < this.ghosts.length; j++) {
-                    this.game.physics.arcade.collide(this.ghosts[j], this.traps[i], this.ghosts[j].trapCollisionHandler, null, this);
-                }
-            }
-
-            if (this.canPress && this.game.input.keyboard.isDown(Phaser.Keyboard.Z)) {
-                this.canPress = false;
-                this.player.actions.push(new PlayerActions(this.player.oldAction, this.player.frames));
-                this.player.frames = 0;
-                this.addGhost();
             }
 
             for (let i = 0; i < this.collectibles.length; i++) {
@@ -114,12 +90,12 @@
             this.game.state.start('Tutorial2');
         }
 
-		// Properties
-		background: Phaser.Sprite;
-		music: Phaser.Sound;
-		player: MadHacks.Player;
+        // Properties
+        background: Phaser.Sprite;
+        music: Phaser.Sound;
+        player: MadHacks.Player;
 
-		// Create
+        // Create
         create() {
             this.background = this.add.sprite(0, 0, 'Background');
             this.loadLevel();
@@ -131,10 +107,5 @@
         restart() {
             this.score = 0;
         }
-
-        // Adds a ghost to the level
-        addGhost() {
-            this.ghosts.push(new Ghost(this.game, 100, 100, this.player.actions));
-        }
-	}
+    }
 }

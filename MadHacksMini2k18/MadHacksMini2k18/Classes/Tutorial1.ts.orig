@@ -16,12 +16,16 @@
         tiles = [];
         exit: MadHacks.Exit;
         traps = [];
+<<<<<<< HEAD
         ghosts = [];
         timer = 1000;
         canPress = true;
+=======
         collectibles = [];
         score = 0;
         scoreText: Phaser.Text;
+
+>>>>>>> 08de73585ed54cb61368cb19e17e2d0fb12cca1a
         loadLevel() {
             for (let i = 0; i < this.level.length; i++) {
                 for (let j = 0; j < this.level[i].length; j++) {
@@ -75,7 +79,8 @@
             }
 
             for (let i = 0; i < this.traps.length; i++) {
-                this.game.physics.arcade.collide(this.player, this.traps[i], this.trapCollisionHandler, null, this);
+<<<<<<< HEAD
+                this.game.physics.arcade.collide(this.player, this.traps[i], this.player.trapCollisionHandler, null, this);
                 for (let j = 0; j < this.ghosts.length; j++) {
                     this.game.physics.arcade.collide(this.ghosts[j], this.traps[i], this.ghosts[j].trapCollisionHandler, null, this);
                 }
@@ -86,6 +91,11 @@
                 this.player.actions.push(new PlayerActions(this.player.oldAction, this.player.frames));
                 this.player.frames = 0;
                 this.addGhost();
+            }
+
+		}
+=======
+                this.game.physics.arcade.collide(this.player, this.traps[i], this.trapCollisionHandler, null, this);
             }
 
             for (let i = 0; i < this.collectibles.length; i++) {
@@ -113,6 +123,7 @@
         exitCollisionHandler(obj1: Player, obj2: Exit) {
             this.game.state.start('Tutorial2');
         }
+>>>>>>> 08de73585ed54cb61368cb19e17e2d0fb12cca1a
 
 		// Properties
 		background: Phaser.Sprite;
@@ -128,13 +139,16 @@
             });
         }
 
-        restart() {
-            this.score = 0;
+<<<<<<< HEAD
         }
 
         // Adds a ghost to the level
         addGhost() {
             this.ghosts.push(new Ghost(this.game, 100, 100, this.player.actions));
+=======
+        restart() {
+            this.score = 0;
+>>>>>>> 08de73585ed54cb61368cb19e17e2d0fb12cca1a
         }
 	}
 }

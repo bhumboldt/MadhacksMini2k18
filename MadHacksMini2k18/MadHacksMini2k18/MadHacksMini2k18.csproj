@@ -56,6 +56,7 @@
     <TypeScriptSourceRoot />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Assets\Collectible.png" />
     <Content Include="Assets\Exit.png" />
     <Content Include="Assets\LevelBackground.png" />
     <Content Include="Assets\MainMenuBackground.png" />
@@ -83,8 +84,8 @@
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="box2d.d.ts" />
     <TypeScriptCompile Include="Classes\Boot.ts" />
+    <TypeScriptCompile Include="Classes\Collectible.ts" />
     <TypeScriptCompile Include="Classes\Exit.ts" />
-    <TypeScriptCompile Include="Classes\EPlayerActions.ts" />
     <TypeScriptCompile Include="Classes\PlayerActions.ts" />
     <TypeScriptCompile Include="Classes\Ghost.ts" />
     <TypeScriptCompile Include="Classes\Tile.ts" />
@@ -93,6 +94,7 @@
     <TypeScriptCompile Include="Classes\Player.ts" />
     <TypeScriptCompile Include="Classes\Preloader.ts" />
     <TypeScriptCompile Include="Classes\Trap.ts" />
+    <TypeScriptCompile Include="Classes\Tutorial2.ts" />
     <TypeScriptCompile Include="p2.d.ts" />
     <TypeScriptCompile Include="phaser.comments.d.ts" />
     <TypeScriptCompile Include="phaser.d.ts" />
