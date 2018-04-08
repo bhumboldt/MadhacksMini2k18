@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Preloader = /** @class */ (function (_super) {
+    var Preloader = (function (_super) {
         __extends(Preloader, _super);
         function Preloader() {
             return _super !== null && _super.apply(this, arguments) || this;

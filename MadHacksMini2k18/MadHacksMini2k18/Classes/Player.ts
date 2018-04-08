@@ -37,6 +37,7 @@
         }
 
         update() {
+            console.log("y velocity begin" + this.body.velocity.y)
             //console.log(this.currentAction);
             if (this.isDead) {
                 this.game.state.restart(true, false);
@@ -77,8 +78,10 @@
 
 			// Jumping
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+                console.log("pressing space");
                 if (this.canJump) {
-                    this.body.velocity.y = -250;
+                    this.body.velocity.y = -300;
+                    console.log("am jumpin" + this.body.velocity.y);
                     this.canJump = false;
                     this.actions.push(new PlayerActions(this.oldAction, this.frames));
 
@@ -86,7 +89,8 @@
                     this.actions.push(new PlayerActions("JUMP", this.frames));
                     this.frames = 0;
 				} 
-			}
+            }
+            console.log("y velocity" + this.body.velocity.y);
 		}
 
 		create() {
@@ -95,7 +99,6 @@
 
         collisionHandler(obj1: Player, obj2) {
             if (obj2.y - (obj1.y + obj1.height) < 1 && obj2.y - (obj1.y + obj1.height) >= 0) {
-                obj1.body.velocity.y = 0;
                 obj1.canJump = true;
             } else if (obj1.body.velocity.y === 0) {
                 obj1.canJump = true;

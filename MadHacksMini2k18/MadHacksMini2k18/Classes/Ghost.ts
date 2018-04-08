@@ -47,7 +47,7 @@
                 // Jumping
                 if (this.action === "JUMP") {
                     if (this.canJump) {
-                        this.body.velocity.y = -250;
+                        this.body.velocity.y = -300;
                         this.canJump = false;
                     }
                     this.frames = 0;
@@ -66,14 +66,15 @@
             } else {
                 this.body.velocity.x = 0;
             }
-            else {
-                this.body.velocity.x = 0;
-            }
         }
 
         collisionHandler(obj1: Ghost, obj2) {
-            obj1.body.velocity.y = 0;
-            obj1.isTouchingGround = true;
+            if (obj2.y - (obj1.y + obj1.height) < 1 && obj2.y - (obj1.y + obj1.height) >= 0) {
+                obj1.body.velocity.y = 0;
+                obj1.canJump = true;
+            } else if (obj1.body.velocity.y === 0) {
+                obj1.canJump = true;
+            }
         }
 
         trapCollisionHandler(obj1: Ghost, obj2: Trap) {

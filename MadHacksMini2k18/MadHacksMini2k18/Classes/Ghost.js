@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Ghost = /** @class */ (function (_super) {
+    var Ghost = (function (_super) {
         __extends(Ghost, _super);
         function Ghost(game, x, y, actions) {
             var _this = _super.call(this, game, x, y, 'Player', 0) || this;
@@ -44,7 +44,7 @@ var MadHacks;
                 // Jumping
                 if (this.action === "JUMP") {
                     if (this.canJump) {
-                        this.body.velocity.y = -250;
+                        this.body.velocity.y = -300;
                         this.canJump = false;
                     }
                     this.frames = 0;
@@ -66,8 +66,13 @@ var MadHacks;
             }
         };
         Ghost.prototype.collisionHandler = function (obj1, obj2) {
-            obj1.body.velocity.y = 0;
-            obj1.isTouchingGround = true;
+            if (obj2.y - (obj1.y + obj1.height) < 1 && obj2.y - (obj1.y + obj1.height) >= 0) {
+                obj1.body.velocity.y = 0;
+                obj1.canJump = true;
+            }
+            else if (obj1.body.velocity.y === 0) {
+                obj1.canJump = true;
+            }
         };
         Ghost.prototype.trapCollisionHandler = function (obj1, obj2) {
             obj1.isDead = true;
