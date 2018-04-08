@@ -12,6 +12,7 @@
 
         preload() {
             // Preload image bar
+            this.game.load.image('Loader', 'Assets/loader.png');
         }
 
         create() {

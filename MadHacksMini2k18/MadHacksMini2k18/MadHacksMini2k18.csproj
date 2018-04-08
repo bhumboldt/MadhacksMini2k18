@@ -56,11 +56,14 @@
     <TypeScriptSourceRoot />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Assets\Button.png" />
     <Content Include="Assets\Collectible.png" />
     <Content Include="Assets\Exit.png" />
     <Content Include="Assets\Key.png" />
     <Content Include="Assets\LevelBackground.png" />
     <Content Include="Assets\Lock.png" />
+    <Content Include="Assets\loader.png" />
+    <Content Include="Assets\logo.png" />
     <Content Include="Assets\MainMenuBackground.png" />
     <Content Include="Assets\Player.png" />
     <Content Include="Assets\Tile.png" />
