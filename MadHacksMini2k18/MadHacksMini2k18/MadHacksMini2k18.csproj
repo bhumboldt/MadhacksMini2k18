@@ -58,7 +58,9 @@
   <ItemGroup>
     <Content Include="Assets\Collectible.png" />
     <Content Include="Assets\Exit.png" />
+    <Content Include="Assets\Key.png" />
     <Content Include="Assets\LevelBackground.png" />
+    <Content Include="Assets\Lock.png" />
     <Content Include="Assets\MainMenuBackground.png" />
     <Content Include="Assets\Player.png" />
     <Content Include="Assets\Tile.png" />
@@ -86,6 +88,8 @@
     <TypeScriptCompile Include="Classes\Boot.ts" />
     <TypeScriptCompile Include="Classes\Collectible.ts" />
     <TypeScriptCompile Include="Classes\Exit.ts" />
+    <TypeScriptCompile Include="Classes\Key.ts" />
+    <TypeScriptCompile Include="Classes\Lock.ts" />
     <TypeScriptCompile Include="Classes\Levels.ts" />
     <TypeScriptCompile Include="Classes\PlayerActions.ts" />
     <TypeScriptCompile Include="Classes\Ghost.ts" />

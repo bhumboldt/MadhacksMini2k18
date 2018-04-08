@@ -14,21 +14,11 @@ var MadHacks;
         __extends(Level, _super);
         function Level() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
-            _this.level = [
-                'xxxxxxxxxxxxxxxxxxxx',
-                'x                  w',
-                'x                  w',
-                'x                  w',
-                'x                  w',
-                'x        c         w',
-                'x         x        w',
-                'x s       x        w',
-                'x p       x        w',
-                'xxxxxxxxxxxxxxxxxxex'
-            ];
             _this.tiles = [];
             _this.traps = [];
             _this.ghosts = [];
+            _this.locks = [];
+            _this.keys = [];
             _this.timer = 25;
             _this.canPress = true;
             _this.collectibles = [];
@@ -70,6 +60,14 @@ var MadHacks;
                         var wall = new MadHacks.Wall(this.game, j * 32, i * 32);
                         this.walls.push(wall);
                     }
+                    if (this.level[i][j] === 'l') {
+                        var lock = new MadHacks.Lock(this.game, j * 32, i * 32, 1);
+                        this.locks.push(lock);
+                    }
+                    if (this.level[i][j] === 'k') {
+                        var key = new MadHacks.Key(this.game, j * 32, i * 32, 1);
+                        this.keys.push(key);
+                    }
                 }
             }
         };
@@ -77,6 +75,8 @@ var MadHacks;
         };
         Level.prototype.update = function () {
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.R)) {
+                this.ghostTexts.splice(0, this.ghostTexts.length);
+                this.ghosts.splice(0, this.ghosts.length);
                 this.game.state.restart();
             }
             for (var i = 0; i < this.ghostTexts.length; i++) {
@@ -104,11 +104,16 @@ var MadHacks;
                     this.game.physics.arcade.collide(this.ghosts[j], this.traps[i], this.ghosts[j].trapCollisionHandler, null, this);
                 }
             }
+            // Collectibles
             for (var i = 0; i < this.collectibles.length; i++) {
                 this.game.physics.arcade.overlap(this.player, this.collectibles[i], this.collectibleCollisionHandler, null, this);
             }
-            if (this.game.physics.arcade.overlap(this.player, this.exit, this.exitCollisionHandler, null, this)) {
+            // Exit
+            this.game.physics.arcade.overlap(this.player, this.exit, this.exitCollisionHandler, null, this);
+            for (var i = 0; i < this.ghosts.length; i++) {
+                this.game.physics.arcade.overlap(this.ghosts[i], this.exit, this.exitCollisionHandler, null, this);
             }
+            // Ghosts
             for (var i = 0; i < this.ghosts.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.ghosts[i], this.ghostCollisionHandler, null, this);
                 for (var j = 0; j < this.ghosts.length; j++) {
@@ -117,6 +122,21 @@ var MadHacks;
                     }
                 }
             }
+            // Keys
+            for (var i = 0; i < this.keys.length; i++) {
+                this.game.physics.arcade.overlap(this.player, this.keys[i], this.keyCollisionHandler, null, this);
+                for (var j = 0; j < this.ghosts.length; j++) {
+                    this.game.physics.arcade.overlap(this.ghosts[j], this.keys[i], this.keyCollisionHandler, null, this);
+                }
+            }
+            // Locks
+            for (var i = 0; i < this.locks.length; i++) {
+                this.game.physics.arcade.collide(this.player, this.locks[i], this.lockCollisionHandler, null, this);
+                for (var j = 0; j < this.ghosts.length; j++) {
+                    this.game.physics.arcade.collide(this.ghosts[j], this.locks[i], this.lockCollisionHandler, null, this);
+                }
+            }
+            // Walls
             for (var i = 0; i < this.walls.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.walls[i], this.wallCollisionHandler, null, this);
                 for (var j = 0; j < this.ghosts.length; j++) {
@@ -184,9 +204,21 @@ var MadHacks;
             this.loadLevel();
             this.renderScore();
         };
+        Level.prototype.lockCollisionHandler = function (obj1, obj2) {
+        };
+        Level.prototype.keyCollisionHandler = function (obj1, obj2) {
+            console.log('hit key');
+            for (var i = 0; i < this.locks.length; i++) {
+                if (obj2.id === this.locks[i].id) {
+                    this.locks[i].destroy();
+                }
+            }
+            obj2.destroy();
+        };
         // Create
         Level.prototype.create = function () {
             this.background = this.add.sprite(0, 0, 'Background');
+            this.level = this.levelManager.levelArray[this.levelManager.currentLevel];
             this.loadLevel();
             this.renderScore();
             if (this.levelManager.currentLevel === 0) {
@@ -207,7 +239,7 @@ var MadHacks;
             var ghostText = this.game.add.text(Math.floor(ghost.x + ghost.width / 2), Math.floor(ghost.y + ghost.height / 2), '' + this.ghosts.length);
             ghostText.anchor.set(0.5);
             this.ghostTexts.push(ghostText);
-            this.player.actions = this.player.actions.splice(0, this.player.actions.length);
+            this.player.actions.splice(0, this.player.actions.length);
         };
         return Level;
     }(Phaser.State));

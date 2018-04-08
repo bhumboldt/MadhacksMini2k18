@@ -37,8 +37,6 @@
         }
 
         update() {
-            console.log("y velocity begin" + this.body.velocity.y)
-            //console.log(this.currentAction);
             if (this.isDead) {
                 this.game.state.restart(true, false);
             }
@@ -78,10 +76,8 @@
 
 			// Jumping
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-                console.log("pressing space");
                 if (this.canJump) {
                     this.body.velocity.y = -300;
-                    console.log("am jumpin" + this.body.velocity.y);
                     this.canJump = false;
                     this.actions.push(new PlayerActions(this.oldAction, this.frames));
 
@@ -90,7 +86,6 @@
                     this.frames = 0;
 				} 
             }
-            console.log("y velocity" + this.body.velocity.y);
 		}
 
 		create() {

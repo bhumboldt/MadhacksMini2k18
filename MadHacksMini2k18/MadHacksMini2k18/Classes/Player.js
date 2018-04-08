@@ -34,8 +34,6 @@ var MadHacks;
         Player.prototype.preload = function () {
         };
         Player.prototype.update = function () {
-            console.log("y velocity begin" + this.body.velocity.y);
-            //console.log(this.currentAction);
             if (this.isDead) {
                 this.game.state.restart(true, false);
             }
@@ -70,10 +68,8 @@ var MadHacks;
             }
             // Jumping
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-                console.log("pressing space");
                 if (this.canJump) {
                     this.body.velocity.y = -300;
-                    console.log("am jumpin" + this.body.velocity.y);
                     this.canJump = false;
                     this.actions.push(new MadHacks.PlayerActions(this.oldAction, this.frames));
                     // Pull out of if statement
@@ -81,7 +77,6 @@ var MadHacks;
                     this.frames = 0;
                 }
             }
-            console.log("y velocity" + this.body.velocity.y);
         };
         Player.prototype.create = function () {
             // this.game.input.onDown.addOnce()

@@ -7,30 +7,18 @@ var MadHacks;
             this.levelArray = [[
                     // Level 1
                     'xxxxxxxxxxxxxxxxxxxx',
-                    'w                  w',
-                    'w                  w',
-                    'w                  w',
-                    'w                  w',
-                    'w        c         w',
-                    'w         w        w',
-                    'w s       w        w',
-                    'w p       w        w',
+                    'x                  x',
+                    'x                  x',
+                    'x                  x',
+                    'x                  x',
+                    'x        c         x',
+                    'x         x        x',
+                    'x s       x        x',
+                    'x p       x        x',
                     'xxxxxxxxxxxxxxxxxxex'
                 ],
                 [
                     'xxxxxxxxxxxxxxxxxxxx',
-                    'x                  x',
-                    'x                  x',
-                    'x t                x',
-                    'x             c   xx',
-                    'x        c         x',
-                    'x             c   xx',
-                    'x   c              x',
-                    'x p          t     e',
-                    'xxxxxxxxxxxxxxxxxtxx'
-                ],
-                [
-                    'xxxxxxxxxxxxxxxexxxx',
                     'x  x               x',
                     'x px    x          x',
                     'xxxx    xxxxx      x',
@@ -38,7 +26,19 @@ var MadHacks;
                     'x       x       e  x',
                     'x       x   xxxxxxxx',
                     'x     t x  x       x',
-                    'x   e   x       s  x',
+                    'x       x       s  x',
+                    'xxxxxxxxxxxxxxxxxxxx'
+                ],
+                [
+                    'xxxxxxxxxxxxxxxxxxxx',
+                    'x    k     l       x',
+                    'x          l       x',
+                    'x          l       x',
+                    'x          l    e  x',
+                    'x          l       x',
+                    'x  s       l       x',
+                    'x  p       l       x',
+                    'x          l       x',
                     'xxxxxxxxxxxxxxxxxxxx'
                 ]
             ];

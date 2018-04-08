@@ -1,22 +1,14 @@
 ﻿module MadHacks {
 
 	export class Level extends Phaser.State {
-        level = [
-            'xxxxxxxxxxxxxxxxxxxx',
-            'x                  w',
-            'x                  w',
-            'x                  w',
-            'x                  w',
-            'x        c         w',
-            'x         x        w',
-            'x s       x        w',
-            'x p       x        w',
-            'xxxxxxxxxxxxxxxxxxex'
-        ]
+        
+        level: string[];
         tiles = [];
         exit: MadHacks.Exit;
         traps = [];
         ghosts = [];
+        locks = [];
+        keys = [];
         timer = 25;
         canPress = true;
         collectibles = [];
@@ -65,6 +57,16 @@
                         let wall = new Wall(this.game, j * 32, i * 32);
                         this.walls.push(wall);
                     }
+
+                    if (this.level[i][j] === 'l') {
+                        let lock = new Lock(this.game, j * 32, i * 32, 1);
+                        this.locks.push(lock);
+                    }
+
+                    if (this.level[i][j] === 'k') {
+                        let key = new Key(this.game, j * 32, i * 32, 1);
+                        this.keys.push(key);
+                    }
                 }
             }
         }
@@ -76,6 +78,8 @@
         update() {
 
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.R)) {
+                this.ghostTexts.splice(0, this.ghostTexts.length);
+                this.ghosts.splice(0, this.ghosts.length);
                 this.game.state.restart();
             }
             for (let i = 0; i < this.ghostTexts.length; i++) {
@@ -109,15 +113,18 @@
                 }
             }
 
-
+            // Collectibles
             for (let i = 0; i < this.collectibles.length; i++) {
                 this.game.physics.arcade.overlap(this.player, this.collectibles[i], this.collectibleCollisionHandler, null, this);
             }
 
-            if (this.game.physics.arcade.overlap(this.player, this.exit, this.exitCollisionHandler, null, this)) {
-
+            // Exit
+            this.game.physics.arcade.overlap(this.player, this.exit, this.exitCollisionHandler, null, this);
+            
+            for (let i = 0; i < this.ghosts.length; i++) {
+                this.game.physics.arcade.overlap(this.ghosts[i], this.exit, this.exitCollisionHandler, null, this);
             }
-
+            // Ghosts
             for (let i = 0; i < this.ghosts.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.ghosts[i], this.ghostCollisionHandler, null, this);
                 for (let j = 0; j < this.ghosts.length; j++) {
@@ -127,6 +134,23 @@
                 }
             }
 
+            // Keys
+            for (let i = 0; i < this.keys.length; i++) {
+                this.game.physics.arcade.overlap(this.player, this.keys[i], this.keyCollisionHandler, null, this);
+                for (let j = 0; j < this.ghosts.length; j++) {
+                        this.game.physics.arcade.overlap(this.ghosts[j], this.keys[i], this.keyCollisionHandler, null, this);
+                }
+            }
+
+            // Locks
+            for (let i = 0; i < this.locks.length; i++) {
+                this.game.physics.arcade.collide(this.player, this.locks[i], this.lockCollisionHandler, null, this);
+                for (let j = 0; j < this.ghosts.length; j++) {
+                    this.game.physics.arcade.collide(this.ghosts[j], this.locks[i], this.lockCollisionHandler, null, this);
+                }
+            }
+
+            // Walls
             for (let i = 0; i < this.walls.length; i++) {
                 this.game.physics.arcade.collide(this.player, this.walls[i], this.wallCollisionHandler, null, this);
                 for (let j = 0; j < this.ghosts.length; j++) {
@@ -160,8 +184,7 @@
         ghostCollisionHandler(obj1: Player, obj2: Ghost) {
             obj1.canJump = true;
             obj2.canJump = true;
-            obj2.body.velocity.x = 0;
-            
+            obj2.body.velocity.x = 0;  
         }
 
         ghostghostCollisionHandler(obj1: Ghost, obj2: Ghost) {
@@ -177,7 +200,7 @@
             this.scoreText.text = 'Score: ' + this.score;
         }
 
-        exitCollisionHandler(obj1: Player, obj2: Exit) {
+        exitCollisionHandler(obj1, obj2: Exit) {
             this.player.destroy();
             for (let i = 0; i < this.ghosts.length; i++) {
                 this.ghosts[i].destroy();
@@ -206,6 +229,19 @@
             this.renderScore();
         }
 
+        lockCollisionHandler(obj1, obj2: Lock) {
+        }
+
+        keyCollisionHandler(obj1, obj2: Key) {
+            console.log('hit key');
+            for (let i = 0; i < this.locks.length; i++) {
+                if (obj2.id === this.locks[i].id) {
+                    this.locks[i].destroy();
+                }
+            }
+            obj2.destroy();
+        }
+
 		// Properties
 		background: Phaser.Sprite;
 		music: Phaser.Sound;
@@ -214,6 +250,7 @@
 		// Create
         create() {
             this.background = this.add.sprite(0, 0, 'Background');
+            this.level = this.levelManager.levelArray[this.levelManager.currentLevel];
             this.loadLevel();
             this.renderScore();
             if (this.levelManager.currentLevel === 0) {
@@ -228,7 +265,7 @@
                 font: '15px Arial'
             });
         }
-
+        
         // Adds a ghost to the level
         addGhost() {
             let ghost = new Ghost(this.game, this.ghostSpawnX, this.ghostSpawnY, this.player.actions);
@@ -236,7 +273,7 @@
             let ghostText = this.game.add.text(Math.floor(ghost.x + ghost.width / 2), Math.floor(ghost.y + ghost.height / 2), '' + this.ghosts.length);
             ghostText.anchor.set(0.5);
             this.ghostTexts.push(ghostText);
-            this.player.actions = this.player.actions.splice(0, this.player.actions.length);
+            this.player.actions.splice(0, this.player.actions.length);
         }
 	}
 }
