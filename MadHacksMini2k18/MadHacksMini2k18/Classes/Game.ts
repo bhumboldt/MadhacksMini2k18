@@ -1,7 +1,7 @@
 ﻿module MadHacks {
     export class Game extends Phaser.Game {
         constructor() {
-            super(640, 320, Phaser.AUTO, 'content', null);
+            super(640, 640, Phaser.AUTO, 'content', null);
 
             this.state.add('Boot', MadHacks.Boot, false);
             this.state.add('Preloader', MadHacks.Preloader, false);

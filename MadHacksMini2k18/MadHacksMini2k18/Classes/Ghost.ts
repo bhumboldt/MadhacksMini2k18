@@ -47,7 +47,7 @@
                 // Jumping
                 if (this.action === "JUMP") {
                     if (this.canJump) {
-                        this.body.velocity.y = -300;
+                        this.body.velocity.y = -325;
                         this.canJump = false;
                     }
                     this.frames = 0;

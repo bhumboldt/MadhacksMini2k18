@@ -77,7 +77,7 @@
 			// Jumping
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
                 if (this.canJump) {
-                    this.body.velocity.y = -300;
+                    this.body.velocity.y = -325;
                     this.canJump = false;
                     this.actions.push(new PlayerActions(this.oldAction, this.frames));
 

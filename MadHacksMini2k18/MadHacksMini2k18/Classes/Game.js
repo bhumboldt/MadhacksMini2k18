@@ -13,7 +13,7 @@ var MadHacks;
     var Game = (function (_super) {
         __extends(Game, _super);
         function Game() {
-            var _this = _super.call(this, 640, 320, Phaser.AUTO, 'content', null) || this;
+            var _this = _super.call(this, 640, 640, Phaser.AUTO, 'content', null) || this;
             _this.state.add('Boot', MadHacks.Boot, false);
             _this.state.add('Preloader', MadHacks.Preloader, false);
             _this.state.add('MainMenu', MadHacks.MainMenu, false);
