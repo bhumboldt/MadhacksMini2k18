@@ -115,6 +115,9 @@
 
             // Collectibles
             for (let i = 0; i < this.collectibles.length; i++) {
+                for (let j = 0; j < this.ghosts.length; j++) {
+                    this.game.physics.arcade.overlap(this.ghosts[j], this.collectibles[i], this.collectibleCollisionHandler, null, this);
+                }
                 this.game.physics.arcade.overlap(this.player, this.collectibles[i], this.collectibleCollisionHandler, null, this);
             }
 
@@ -175,7 +178,7 @@
 
         }
 
-        collectibleCollisionHandler(obj1: Player, obj2: Collectible) {
+        collectibleCollisionHandler(obj1, obj2: Collectible) {
             obj2.destroy(true);
             this.score++;
             this.scoreText.text = 'Score: ' + this.score;

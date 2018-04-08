@@ -20,8 +20,8 @@
             'x                  x',
             'x                  x',
             'x                  x',
-            'x                  x',
             'x        c         x',
+            'x         x        x',
             'x         x        x',
             'x s       x        x',
             'x p       x        x',
@@ -62,7 +62,29 @@
         'x  p       l       x',
         'x          l       x',
         'xxxxxxxxxxxxxxxxxxxx'
-            ]
+        ],
+        [   // Level 4
+            'xxxxxxxxxxxxxxxxxxxx',
+            'x                  x',
+            'x                  x',
+            'x      c           x',
+            'x                  x',
+            'x           t  t  ex',
+            'xttt      xxxxxxxxxx',
+            'x          ttttttttx',
+            'xxxxx      xxxxxxxxx',
+            'xtttttt         s  x',
+            'xxxxxxxxxxxxxxxxxxxx',
+            'x                  x',
+            'x                  x',
+            'x                  x',
+            'x           t  t   x',
+            'xttt      xxxxxxxxxx',
+            'x          ttttttttx',
+            'xxxxx      xxxxxxxxx',
+            'xtttttt         p  x',
+            'xxxxxxxxxxxxxxxxxxxx'
+        ],
         
         ];
         constructor() {

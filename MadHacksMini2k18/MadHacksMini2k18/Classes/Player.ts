@@ -24,7 +24,6 @@
 
 			super(game, x, y, 'Player', 0);
 			this.game.physics.arcade.enableBody(this);
-			this.anchor.setTo(0.5, 0);
             game.add.existing(this);
             this.canJump = true;
             this.jumpTimer = 0;
@@ -79,7 +78,7 @@
                 if (this.canJump) {
                     this.body.velocity.y = -325;
                     this.canJump = false;
-                    this.actions.push(new PlayerActions(this.oldAction, this.frames));
+                    this.actions.push(new PlayerActions(this.oldAction, this.frames + 1));
 
                     // Pull out of if statement
                     this.actions.push(new PlayerActions("JUMP", this.frames));

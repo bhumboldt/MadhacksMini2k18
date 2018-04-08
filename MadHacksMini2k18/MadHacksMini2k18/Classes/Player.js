@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Player = (function (_super) {
+    var Player = /** @class */ (function (_super) {
         __extends(Player, _super);
         function Player(game, x, y) {
             var _this = _super.call(this, game, x, y, 'Player', 0) || this;
@@ -19,7 +19,6 @@ var MadHacks;
             _this.originalX = 0;
             _this.originalY = 0;
             _this.game.physics.arcade.enableBody(_this);
-            _this.anchor.setTo(0.5, 0);
             game.add.existing(_this);
             _this.canJump = true;
             _this.jumpTimer = 0;
@@ -71,7 +70,7 @@ var MadHacks;
                 if (this.canJump) {
                     this.body.velocity.y = -325;
                     this.canJump = false;
-                    this.actions.push(new MadHacks.PlayerActions(this.oldAction, this.frames));
+                    this.actions.push(new MadHacks.PlayerActions(this.oldAction, this.frames + 1));
                     // Pull out of if statement
                     this.actions.push(new MadHacks.PlayerActions("JUMP", this.frames));
                     this.frames = 0;
