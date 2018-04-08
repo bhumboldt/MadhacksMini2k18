@@ -24,6 +24,7 @@ var MadHacks;
         };
         Boot.prototype.preload = function () {
             // Preload image bar
+            this.game.load.image('Loader', 'Assets/loader.png');
         };
         Boot.prototype.create = function () {
             this.game.state.start('Preloader');
