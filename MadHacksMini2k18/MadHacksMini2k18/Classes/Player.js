@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var MadHacks;
 (function (MadHacks) {
-    var Player = /** @class */ (function (_super) {
+    var Player = (function (_super) {
         __extends(Player, _super);
         function Player(game, x, y) {
             var _this = _super.call(this, game, x, y, 'Player', 0) || this;
@@ -76,7 +76,7 @@ var MadHacks;
                     this.canJump = false;
                     this.actions.push(new MadHacks.PlayerActions(this.oldAction, this.frames + 1));
                     // Pull out of if statement
-                    this.actions.push(new MadHacks.PlayerActions("JUMP", this.frames));
+                    this.actions.push(new MadHacks.PlayerActions("JUMP", 0));
                     this.frames = 0;
                 }
             }

@@ -87,7 +87,7 @@
                     this.actions.push(new PlayerActions(this.oldAction, this.frames + 1));
 
                     // Pull out of if statement
-                    this.actions.push(new PlayerActions("JUMP", this.frames));
+                    this.actions.push(new PlayerActions("JUMP", 0));
                     this.frames = 0;
 				} 
             }
