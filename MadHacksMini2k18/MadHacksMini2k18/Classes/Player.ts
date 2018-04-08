@@ -24,7 +24,6 @@
 
 			super(game, x, y, 'Player', 0);
 			this.game.physics.arcade.enableBody(this);
-			this.anchor.setTo(0.5, 0);
             game.add.existing(this);
             this.canJump = true;
             this.jumpTimer = 0;
@@ -74,9 +73,15 @@
 				this.body.velocity.x = 0;
 			}
 
+
+            if (this.jumpTimer > 0) {
+                this.canJump = false;
+            }
+
 			// Jumping
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
                 if (this.canJump) {
+                    this.jumpTimer = 20;
                     this.body.velocity.y = -325;
                     this.canJump = false;
                     this.actions.push(new PlayerActions(this.oldAction, this.frames));
@@ -86,6 +91,10 @@
                     this.frames = 0;
 				} 
             }
+
+
+            this.jumpTimer--;
+
 		}
 
 		create() {
